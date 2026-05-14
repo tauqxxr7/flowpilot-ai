@@ -60,8 +60,6 @@ The MVP includes seeded FlowZint-style operating knowledge for pricing, refunds,
 
 The backend owns the workflow pipeline. The frontend is an operations console that shows the result of that pipeline in a way a support lead or student demo judge can inspect quickly.
 
-Architecture source file: [assets/architecture/flowpilot-architecture.mmd](assets/architecture/flowpilot-architecture.mmd)
-
 ## AI Workflow Pipeline
 
 1. Customer issue arrives through the Copilot console.
