@@ -58,21 +58,9 @@ The MVP includes seeded FlowZint-style operating knowledge for pricing, refunds,
 
 ![FlowPilot AI architecture diagram](assets/architecture/flowpilot-architecture.svg)
 
-```mermaid
-flowchart LR
-    A["Customer Query"] --> B["Intent Detection"]
-    B --> C["Knowledge Retrieval"]
-    C --> D["AI Decision Engine"]
-    D --> E["Workflow Router"]
-    E --> F["Ticket / Escalation"]
-    F --> G["Dashboard Analytics"]
-
-    C -. "policy snippets" .-> D
-    E -. "owner + priority" .-> F
-    F -. "events" .-> G
-```
-
 The backend owns the workflow pipeline. The frontend is an operations console that shows the result of that pipeline in a way a support lead or student demo judge can inspect quickly.
+
+Architecture source file: [assets/architecture/flowpilot-architecture.mmd](assets/architecture/flowpilot-architecture.mmd)
 
 ## AI Workflow Pipeline
 
