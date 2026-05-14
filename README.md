@@ -58,7 +58,7 @@ The MVP includes seeded FlowZint-style operating knowledge for pricing, refunds,
 
 ![FlowPilot AI architecture diagram](assets/architecture/flowpilot-architecture.svg)
 
-The backend owns the workflow pipeline. The frontend is an operations console that shows the result of that pipeline in a way a support lead or student demo judge can inspect quickly.
+The backend owns the workflow pipeline. The frontend is an operations console that shows the result of that pipeline in a way a support lead or hackathon judge can inspect quickly.
 
 ## AI Workflow Pipeline
 
