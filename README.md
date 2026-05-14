@@ -56,6 +56,8 @@ The MVP includes seeded FlowZint-style operating knowledge for pricing, refunds,
 
 ## Architecture Overview
 
+![FlowPilot AI architecture diagram](assets/architecture/flowpilot-architecture.svg)
+
 ```mermaid
 flowchart LR
     A["Customer Query"] --> B["Intent Detection"]
