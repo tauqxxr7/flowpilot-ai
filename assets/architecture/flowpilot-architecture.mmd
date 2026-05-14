@@ -1,0 +1,9 @@
+flowchart LR
+    A[Customer Query] --> B[Intent Detection]
+    B --> C[Knowledge Retrieval]
+    C --> D[AI Decision Engine]
+    D --> E[Workflow Router]
+    E --> F[Ticket / Escalation]
+    F --> G[Analytics Dashboard]
+    C --> H[(SQLite Knowledge Store)]
+    F --> I[(Ticket and Workflow Logs)]

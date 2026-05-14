@@ -1,0 +1,44 @@
+[
+  {
+    "id": "fz-pricing-001",
+    "title": "FlowZint Pricing Policy",
+    "source": "FlowZint commercial FAQ seed",
+    "category": "pricing",
+    "content": "FlowZint offers workflow automation subscriptions for growing teams. Standard plans include workspace setup, dashboard access, ticket workflow rules, and basic support. Enterprise onboarding can include custom integrations, security review, admin training, and priority escalation."
+  },
+  {
+    "id": "fz-refund-001",
+    "title": "Refund and Cancellation SOP",
+    "source": "FlowZint support SOP seed",
+    "category": "refund",
+    "content": "Refund requests should be checked against the customer's billing cycle, usage state, and original contract terms. If the customer reports duplicate billing or service outage impact, mark the ticket as high priority and send it to finance operations for review."
+  },
+  {
+    "id": "fz-onboarding-001",
+    "title": "Customer Onboarding Checklist",
+    "source": "FlowZint onboarding playbook seed",
+    "category": "onboarding",
+    "content": "New customers should receive a workspace invite, admin configuration checklist, data import guide, and a 30-minute onboarding call. If an onboarding issue blocks first workflow activation, route it to customer success within one business day."
+  },
+  {
+    "id": "fz-support-001",
+    "title": "Product Support Escalation Rules",
+    "source": "FlowZint technical support SOP seed",
+    "category": "product support",
+    "content": "Product support tickets related to failed automations, dashboard sync delays, or integration errors should include the workspace ID, reproduction steps, error timestamp, and affected workflow. Integration outages and repeated automation failures should be escalated to engineering."
+  },
+  {
+    "id": "fz-complaint-001",
+    "title": "Complaint Handling Guideline",
+    "source": "FlowZint operations policy seed",
+    "category": "complaint",
+    "content": "Customer complaints involving repeated delays, billing disputes, or loss of trust should be acknowledged clearly, assigned an owner, and tracked until closure. High-risk customers should be flagged when churn risk or executive escalation is mentioned."
+  },
+  {
+    "id": "fz-sales-001",
+    "title": "Sales Inquiry Qualification",
+    "source": "FlowZint sales operations seed",
+    "category": "sales inquiry",
+    "content": "Sales inquiries should capture company size, current support volume, workflow tools in use, integration requirements, and expected launch timeline. Qualified enterprise inquiries should be routed to sales with context from the original message."
+  }
+]
