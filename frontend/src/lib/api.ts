@@ -18,6 +18,15 @@ export type WorkflowDecision = {
   priority: string;
 };
 
+export type DecisionTimelineItem = {
+  step: number;
+  title: string;
+  description: string;
+  status: string;
+  metadata: Record<string, string | number | string[]>;
+  timestamp: string;
+};
+
 export type QueryResponse = {
   ticket_id: string;
   intent: string;
@@ -25,6 +34,7 @@ export type QueryResponse = {
   response: string;
   sources: SourceSnippet[];
   workflow: WorkflowDecision;
+  decision_timeline: DecisionTimelineItem[];
 };
 
 export type Ticket = {

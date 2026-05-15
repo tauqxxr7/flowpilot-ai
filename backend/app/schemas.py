@@ -30,6 +30,15 @@ class WorkflowDecision(BaseModel):
     priority: str
 
 
+class DecisionTimelineItem(BaseModel):
+    step: int
+    title: str
+    description: str
+    status: str
+    metadata: dict
+    timestamp: str
+
+
 class QueryResponse(BaseModel):
     ticket_id: str
     intent: str
@@ -37,6 +46,7 @@ class QueryResponse(BaseModel):
     response: str
     sources: list[SourceSnippet]
     workflow: WorkflowDecision
+    decision_timeline: list[DecisionTimelineItem]
 
 
 class DashboardStats(BaseModel):

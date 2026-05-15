@@ -8,16 +8,16 @@ Target length: 90 seconds to 3 minutes.
    - Point out total tickets, escalations, confidence, categories, and recent workflow activity.
 2. Open the knowledge base.
    - Explain that responses are grounded in business policy data.
-3. Run the refund scenario.
+3. Open Workflow Lab and run the refund scenario.
    - Prompt: `We were charged twice and need a refund before renewal.`
-   - Show intent, confidence, retrieved sources, action, owner, and ticket ID.
+   - Show the Live Workflow Replay: intent, confidence, retrieved sources, action, owner, ticket ID, and dashboard update.
 4. Run the technical support escalation scenario.
    - Prompt: `Our dashboard automation failed three times and the customer is threatening to escalate.`
    - Show escalation routing.
 5. Open tickets.
    - Show the audit trail of workflow outputs.
 6. Open workflow lab.
-   - Show that routing can be tested without creating a full ticket.
+   - Zoom into the timeline cards and source citation cards.
 7. Close with architecture.
    - One sentence: query -> intent -> retrieval -> decision -> router -> ticket -> dashboard.
 

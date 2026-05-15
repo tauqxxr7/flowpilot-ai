@@ -44,6 +44,7 @@ The MVP includes seeded FlowZint-style operating knowledge for pricing, refunds,
 
 ## Core Features
 
+- Live Workflow Replay: a step-by-step decision timeline showing how a customer issue becomes a routed business workflow
 - Knowledge base with seeded FlowZint-style policies and admin upload endpoint
 - Customer query intake for support and sales issues
 - Intent detection for refund, pricing, product support, onboarding, complaint, escalation, and sales inquiry patterns
@@ -168,15 +169,14 @@ Set `GEMINI_API_KEY` in `backend/.env`. The demo still works without it using th
 
 Target duration: 3 minutes.
 
-1. Open `/` and frame the project: FlowPilot AI is an operations workflow platform, not a chatbot.
+1. Open `/dashboard` and frame the project: FlowPilot AI is an operations workflow platform, not a chatbot.
 2. Open `/knowledge-base` and show seeded company context. Optionally upload a small `.txt` policy note.
-3. Use the refund prompt: `We were charged twice and the client is asking for a refund before renewal.`
-4. Show the output: intent, confidence, cited policy snippets, ticket ID, owner, priority, and workflow action.
-5. Use the escalation prompt: `Our dashboard automation failed three times and the customer is threatening to escalate.`
+3. Open `/workflow-lab` and run: `We were charged twice and need a refund before renewal.`
+4. Zoom into the Live Workflow Replay: customer query received, intent detected, sources retrieved, AI decision generated, confidence scored, route selected, ticket created, dashboard updated.
+5. Run the escalation prompt: `Our dashboard automation failed three times and the customer is threatening to escalate.`
 6. Show that risk language routes the workflow to a human owner instead of auto-resolving.
-7. Open `/dashboard` and show updated category, confidence, escalation, and recent activity metrics.
-8. Open `/tickets` to show persisted workflow history.
-9. Open `/workflow-lab` to demonstrate routing decisions without creating a full ticket.
+7. Open `/tickets` to show persisted workflow history.
+8. Return to `/dashboard` and show updated category, confidence, escalation, and recent activity metrics.
 
 ## Judging Criteria Alignment
 

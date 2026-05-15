@@ -14,9 +14,11 @@ That is the gap FlowPilot AI addresses.
 
 ## 3-Minute Demo Narration
 
-First, open the Knowledge Base page. This shows the business context FlowPilot can retrieve from. For the live demo, we can upload a small text policy note, but the repository also ships with seeded FlowZint-style support, pricing, onboarding, complaint, refund, and sales policies.
+First, open the dashboard. This establishes that FlowPilot is an operations product: tickets, escalations, confidence, categories, and recent workflow activity are visible before we type anything.
 
-Now open the Copilot page.
+Next, open the Knowledge Base page. This shows the business context FlowPilot can retrieve from. For the live demo, we can upload a small text policy note, but the repository also ships with seeded FlowZint-style support, pricing, onboarding, complaint, refund, and sales policies.
+
+Now open Workflow Lab. This is the main demo moment because it shows the Live Workflow Replay.
 
 Submit this customer issue:
 
@@ -26,6 +28,8 @@ We were charged twice and the client is asking for a refund before renewal.
 
 FlowPilot detects the refund intent, retrieves relevant policy context, creates a ticket, assigns the right owner, and shows cited snippets. The important part is that it does not blindly promise a refund; it routes the request for billing validation.
 
+Zoom into the decision timeline. Each step is visible: customer query received, intent detected, knowledge retrieved, AI decision generated, confidence scored, route selected, ticket created, and dashboard updated. This is what makes FlowPilot different from a chatbot.
+
 Next, submit:
 
 ```text
@@ -34,7 +38,7 @@ Our dashboard automation failed three times and the customer is threatening to e
 
 This time, FlowPilot detects product support context and escalation risk. The workflow action changes to human escalation, with high priority.
 
-Now open the dashboard. The dashboard shows total tickets, escalations, confidence distribution, category breakdown, and recent workflow activity.
+Now return to the dashboard. The dashboard shows total tickets, escalations, confidence distribution, category breakdown, and recent workflow activity.
 
 Open the ticket history page. Each workflow run leaves an auditable ticket record.
 

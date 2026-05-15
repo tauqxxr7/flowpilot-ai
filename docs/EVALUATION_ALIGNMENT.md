@@ -2,7 +2,7 @@
 
 ## Model Innovation & Novelty
 
-FlowPilot AI is positioned as an AI operations workflow system rather than a generic chatbot. It combines intent detection, retrieval, decision routing, ticket creation, and dashboard analytics in one flow.
+FlowPilot AI is positioned as an AI operations workflow system rather than a generic chatbot. It combines intent detection, retrieval, decision routing, ticket creation, dashboard analytics, and a Live Workflow Replay that visualizes how the AI decision was made.
 
 ## Real-World Applicability
 

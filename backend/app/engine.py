@@ -4,12 +4,13 @@ import os
 import time
 import uuid
 from collections import Counter
+from datetime import datetime, timezone
 from typing import Any
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-from .schemas import QueryRequest, SourceSnippet, WorkflowDecision
+from .schemas import DecisionTimelineItem, QueryRequest, SourceSnippet, WorkflowDecision
 from .storage import insert_ticket, list_documents, list_tickets
 
 INTENT_KEYWORDS = {
@@ -138,6 +139,87 @@ def build_response(message: str, intent: str, sources: list[SourceSnippet], work
     )
 
 
+def timeline_timestamp() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def build_decision_timeline(
+    payload: QueryRequest,
+    ticket_id: str,
+    intent: str,
+    confidence: float,
+    sources: list[SourceSnippet],
+    workflow: WorkflowDecision,
+) -> list[DecisionTimelineItem]:
+    source_titles = [source.title for source in sources]
+    return [
+        DecisionTimelineItem(
+            step=1,
+            title="Customer Query Received",
+            description=f"A customer issue was received from the {payload.channel} channel.",
+            status="completed",
+            metadata={"channel": payload.channel, "customer": payload.customer_name},
+            timestamp=timeline_timestamp(),
+        ),
+        DecisionTimelineItem(
+            step=2,
+            title="Intent Detected",
+            description=f"The message was classified as a {intent} workflow.",
+            status="completed",
+            metadata={"intent": intent, "confidence": round(confidence, 2)},
+            timestamp=timeline_timestamp(),
+        ),
+        DecisionTimelineItem(
+            step=3,
+            title="Knowledge Sources Retrieved",
+            description="Relevant policy snippets were retrieved from the knowledge base.",
+            status="completed",
+            metadata={"sources": len(sources), "source_titles": source_titles},
+            timestamp=timeline_timestamp(),
+        ),
+        DecisionTimelineItem(
+            step=4,
+            title="AI Decision Generated",
+            description="FlowPilot prepared a grounded support response using retrieved business context.",
+            status="completed",
+            metadata={"response_mode": "gemini" if os.getenv("GEMINI_API_KEY") else "deterministic_fallback"},
+            timestamp=timeline_timestamp(),
+        ),
+        DecisionTimelineItem(
+            step=5,
+            title="Confidence Scored",
+            description="The workflow confidence was scored before selecting an operational action.",
+            status="completed",
+            metadata={"confidence": round(confidence, 2), "decision_confidence": workflow.confidence},
+            timestamp=timeline_timestamp(),
+        ),
+        DecisionTimelineItem(
+            step=6,
+            title="Workflow Route Selected",
+            description=workflow.reason,
+            status="completed",
+            metadata={"action": workflow.action, "priority": workflow.priority, "owner": workflow.owner},
+            timestamp=timeline_timestamp(),
+        ),
+        DecisionTimelineItem(
+            step=7,
+            title="Ticket Created / Escalated",
+            description=f"Ticket {ticket_id} was created with owner {workflow.owner}.",
+            status="completed",
+            metadata={"ticket_id": ticket_id, "owner": workflow.owner, "priority": workflow.priority},
+            timestamp=timeline_timestamp(),
+        ),
+        DecisionTimelineItem(
+            step=8,
+            title="Dashboard Updated",
+            description="The ticket and workflow event are now available to operational dashboard views.",
+            status="completed",
+            metadata={"dashboard_metric": "ticket_count", "workflow_log": "recorded"},
+            timestamp=timeline_timestamp(),
+        ),
+    ]
+
+
 def handle_query(payload: QueryRequest) -> dict[str, Any]:
     started = time.perf_counter()
     intent, confidence = classify_intent(payload.message)
@@ -145,6 +227,7 @@ def handle_query(payload: QueryRequest) -> dict[str, Any]:
     workflow = route_workflow(intent, confidence, payload.message)
     response = build_response(payload.message, intent, sources, workflow)
     ticket_id = f"FP-{uuid.uuid4().hex[:8].upper()}"
+    decision_timeline = build_decision_timeline(payload, ticket_id, intent, confidence, sources, workflow)
     elapsed = round(time.perf_counter() - started, 3)
 
     insert_ticket(
@@ -171,6 +254,7 @@ def handle_query(payload: QueryRequest) -> dict[str, Any]:
         "response": response,
         "sources": sources,
         "workflow": workflow,
+        "decision_timeline": decision_timeline,
     }
 
 
