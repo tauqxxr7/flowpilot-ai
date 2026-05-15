@@ -2,66 +2,44 @@
 
 ## 30-Second Intro
 
-Hi, we are CodingGiants. Our project is FlowPilot AI, an AI-powered business workflow orchestration platform for the FlowZint AI Hackathon 2026.
+Most AI support bots only reply. FlowPilot AI converts a customer issue into an explainable business workflow.
 
-The key idea is simple: most business bots answer questions, but real operations teams need the next workflow action. FlowPilot AI classifies the issue, retrieves business context, decides what should happen next, creates or routes the ticket, and updates the dashboard.
+For a growing SaaS business, that means a refund request, pricing question, onboarding blocker, or support escalation does not stop at a generated answer. FlowPilot detects intent, retrieves business context, scores confidence, selects a workflow route, creates or escalates the ticket, and updates the operations dashboard.
 
-## Problem
+## 2-Minute Demo Script
 
-Support and sales teams repeatedly handle refund requests, pricing questions, onboarding blockers, product issues, complaints, and escalation risks. A generic chatbot can draft a reply, but it usually cannot decide whether the case should be auto-resolved, sent to finance, escalated to a support lead, or routed to sales.
+1. Open `/dashboard`.
+   - "This is the operations view. Before we type anything, FlowPilot already shows ticket volume, escalation load, confidence, categories, and recent activity from seeded demo workflows."
 
-That is the gap FlowPilot AI addresses.
+2. Open `/knowledge-base`.
+   - "These are the business documents used for grounding. The system is designed around company context, not generic answers."
 
-## 3-Minute Demo Narration
+3. Open `/workflow-lab`.
+   - Enter: `We were charged twice and need a refund before renewal.`
+   - Click `Run workflow replay`.
 
-First, open the dashboard. This establishes that FlowPilot is an operations product: tickets, escalations, confidence, categories, and recent workflow activity are visible before we type anything.
+4. Show the result.
+   - "The intent is detected as refund."
+   - "The response is grounded in retrieved billing and refund policy sources."
+   - "Confidence is scored before action is selected."
+   - "The workflow route is ticket creation for Finance Operations, because refund cases need validation."
 
-Next, open the Knowledge Base page. This shows the business context FlowPilot can retrieve from. For the live demo, we can upload a small text policy note, but the repository also ships with seeded FlowZint-style support, pricing, onboarding, complaint, refund, and sales policies.
+5. Zoom into Live Workflow Replay.
+   - "This is the main point of the product. FlowPilot shows the whole decision path: customer query, intent detection, knowledge retrieval, AI decision, confidence scoring, workflow routing, ticket creation, and dashboard update."
+   - "A normal chatbot hides this process. FlowPilot makes it inspectable."
 
-Now open Workflow Lab. This is the main demo moment because it shows the Live Workflow Replay.
+6. Open `/tickets`.
+   - "The workflow output is persisted as an operational ticket, not just a chat message."
 
-Submit this customer issue:
+7. Return to `/dashboard`.
+   - "The dashboard reflects the workflow activity so an operations lead can track what AI resolved, what was escalated, and where risk is building."
 
-```text
-We were charged twice and the client is asking for a refund before renewal.
-```
+## Architecture Explanation
 
-FlowPilot detects the refund intent, retrieves relevant policy context, creates a ticket, assigns the right owner, and shows cited snippets. The important part is that it does not blindly promise a refund; it routes the request for billing validation.
+Customer query -> retrieval -> decision engine -> workflow router -> ticket or escalation -> dashboard analytics.
 
-Zoom into the decision timeline. Each step is visible: customer query received, intent detected, knowledge retrieved, AI decision generated, confidence scored, route selected, ticket created, and dashboard updated. This is what makes FlowPilot different from a chatbot.
+The frontend is a Next.js operations console. The backend is a FastAPI workflow API. SQLite stores demo documents, tickets, and workflow logs. Retrieval uses TF-IDF for a stable MVP, Gemini is optional through `GEMINI_API_KEY`, and a deterministic fallback keeps demos reliable.
 
-Next, submit:
+## Closing Statement
 
-```text
-Our dashboard automation failed three times and the customer is threatening to escalate.
-```
-
-This time, FlowPilot detects product support context and escalation risk. The workflow action changes to human escalation, with high priority.
-
-Now return to the dashboard. The dashboard shows total tickets, escalations, confidence distribution, category breakdown, and recent workflow activity.
-
-Open the ticket history page. Each workflow run leaves an auditable ticket record.
-
-Open the knowledge base. These are the FlowZint-style policies used by retrieval.
-
-Finally, open Workflow Lab. This lets an operator test routing decisions without creating a full ticket.
-
-## Technical Architecture
-
-The system uses a Next.js frontend and FastAPI backend. The backend owns the workflow pipeline:
-
-```text
-Customer Query
--> Intent Detection
--> Knowledge Retrieval
--> AI Decision Engine
--> Workflow Router
--> Ticket / Escalation
--> Dashboard Analytics
-```
-
-SQLite stores documents, tickets, and workflow logs. Retrieval is implemented with TF-IDF for a stable local MVP, and Gemini can be enabled through `GEMINI_API_KEY`.
-
-## Closing
-
-FlowPilot AI is not a chatbot demo. It is a practical AI operations MVP that shows how retrieval, routing, tickets, and analytics can work together to reduce repetitive support work while keeping risky cases in human control.
+FlowPilot AI is not a chatbot. It is an AI workflow orchestration layer for business operations.

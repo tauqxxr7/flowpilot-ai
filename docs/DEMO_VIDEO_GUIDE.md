@@ -1,29 +1,36 @@
 # Demo Video Guide
 
-Target length: 90 seconds to 3 minutes.
+Target length: 2 minutes.
 
-## Suggested Structure
+## Recording Flow
 
-1. Show the dashboard first.
-   - Point out total tickets, escalations, confidence, categories, and recent workflow activity.
-2. Open the knowledge base.
-   - Explain that responses are grounded in business policy data.
-3. Open Workflow Lab and run the refund scenario.
+1. Dashboard first.
+   - Show operational context: tickets processed, escalations, confidence, category distribution, and recent activity.
+2. Knowledge Base.
+   - Show that FlowPilot works from business documents and policy context.
+3. Workflow Lab.
    - Prompt: `We were charged twice and need a refund before renewal.`
-   - Show the Live Workflow Replay: intent, confidence, retrieved sources, action, owner, ticket ID, and dashboard update.
-4. Run the technical support escalation scenario.
-   - Prompt: `Our dashboard automation failed three times and the customer is threatening to escalate.`
-   - Show escalation routing.
-5. Open tickets.
-   - Show the audit trail of workflow outputs.
-6. Open workflow lab.
-   - Zoom into the timeline cards and source citation cards.
-7. Close with architecture.
-   - One sentence: query -> intent -> retrieval -> decision -> router -> ticket -> dashboard.
+   - Click `Run workflow replay`.
+4. Zoom into Live Workflow Replay.
+   - Show each step: query received, intent detected, sources retrieved, decision generated, confidence scored, route selected, ticket created, dashboard updated.
+5. Source cards.
+   - Show retrieved policy snippets and explain grounding.
+6. Tickets page.
+   - Show persisted workflow output.
+7. Architecture close.
+   - Say: "Customer query to retrieval, decision engine, workflow router, ticket or escalation, and dashboard analytics."
+
+## What To Emphasize
+
+- This is not a chatbot UI.
+- The workflow replay is explainable and auditable.
+- The system routes work to business owners.
+- Confidence is used before automation.
+- Demo data is labelled honestly as MVP seed data.
 
 ## Recording Tips
 
-- Keep the browser zoom at 90% or 100%.
-- Run backend and frontend before recording.
-- Use the seeded demo data so the dashboard starts populated.
-- Do not claim production usage or fake customer metrics.
+- Keep browser zoom at 90% or 100%.
+- Use `/workflow-lab` as the main visual moment.
+- Avoid spending time in setup screens.
+- Do not claim production users or fake metrics.

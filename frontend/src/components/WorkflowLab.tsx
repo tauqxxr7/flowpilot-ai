@@ -1,7 +1,8 @@
 "use client";
 
 import { CheckCircle2, Clipboard, GitBranch, Play, RotateCcw } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { QueryResponse, submitQuery } from "@/lib/api";
 import { StatusBadge } from "./StatusBadge";
 import { WorkflowSteps } from "./WorkflowSteps";
@@ -22,6 +23,8 @@ const demoScenarios = [
 ];
 
 export function WorkflowLab() {
+  const searchParams = useSearchParams();
+  const demoStarted = useRef(false);
   const [message, setMessage] = useState(demoScenarios[2].value);
   const [result, setResult] = useState<QueryResponse | null>(null);
   const [error, setError] = useState("");
@@ -41,6 +44,14 @@ export function WorkflowLab() {
     }
   }
 
+  useEffect(() => {
+    if (demoStarted.current || searchParams.get("demo") !== "timeline") {
+      return;
+    }
+    demoStarted.current = true;
+    void runReplay();
+  }, [searchParams]);
+
   async function copySummary() {
     if (!result) {
       return;
@@ -54,8 +65,12 @@ export function WorkflowLab() {
       `Priority: ${result.workflow.priority}`,
       `Reason: ${result.workflow.reason}`,
     ].join("\n");
-    await navigator.clipboard.writeText(summary);
-    setCopied(true);
+    try {
+      await navigator.clipboard.writeText(summary);
+      setCopied(true);
+    } catch {
+      setError("Could not copy summary from this browser context.");
+    }
   }
 
   return (
@@ -94,7 +109,7 @@ export function WorkflowLab() {
               <Play className="h-4 w-4" aria-hidden="true" />
               {loading ? "Running replay" : "Run workflow replay"}
             </button>
-            <button type="button" onClick={() => setResult(null)} className="inline-flex items-center gap-2 rounded-md border border-line bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:border-accent hover:text-accent">
+            <button type="button" onClick={runReplay} disabled={loading || !message.trim()} className="inline-flex items-center gap-2 rounded-md border border-line bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-60">
               <RotateCcw className="h-4 w-4" aria-hidden="true" />
               Replay Workflow
             </button>
@@ -121,20 +136,34 @@ export function WorkflowLab() {
           {result ? (
             <div className="mt-4 space-y-4">
               <WorkflowSteps />
-              <div className="flex flex-wrap gap-2">
-                <StatusBadge value={result.workflow.action} />
-                <StatusBadge value={result.workflow.priority} />
-                <span className="rounded-full border border-line bg-panel px-2.5 py-1 text-xs font-semibold text-gray-700">
-                  {Math.round(result.confidence * 100)}% confidence
-                </span>
+              <div className="grid gap-3 md:grid-cols-3">
+                <div className="rounded-md border border-line bg-panel p-3">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Workflow action</p>
+                  <div className="mt-2"><StatusBadge value={result.workflow.action} /></div>
+                </div>
+                <div className="rounded-md border border-line bg-panel p-3">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Confidence</p>
+                  <p className="mt-2 font-mono text-lg font-semibold">{Math.round(result.confidence * 100)}%</p>
+                </div>
+                <div className="rounded-md border border-line bg-panel p-3">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Owner</p>
+                  <p className="mt-2 text-sm font-semibold">{result.workflow.owner}</p>
+                </div>
               </div>
               <div className="rounded-md border border-line bg-panel p-4">
+                <div className="mb-3 flex flex-wrap gap-2">
+                  <StatusBadge value={result.workflow.priority} />
+                  <span className="rounded-full border border-line bg-white px-2.5 py-1 text-xs font-semibold text-gray-700">
+                    {result.ticket_id}
+                  </span>
+                </div>
                 <p className="text-sm leading-6 text-gray-700">{result.response}</p>
-                <p className="mt-3 text-xs text-gray-500">Ticket {result.ticket_id} | Owner: {result.workflow.owner}</p>
+                <p className="mt-3 text-xs text-gray-500">{result.workflow.reason}</p>
               </div>
-              <div className="space-y-3">
+              <div className="relative space-y-3 border-l border-line pl-4">
                 {result.decision_timeline.map((item) => (
-                  <article key={item.step} className="relative rounded-md border border-line bg-white p-4">
+                  <article key={item.step} className="relative rounded-md border border-line bg-white p-4 transition hover:border-accent/60">
+                    <span className="absolute -left-[23px] top-5 flex h-4 w-4 rounded-full border-2 border-white bg-accent shadow-sm" />
                     <div className="flex gap-3">
                       <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-accent">
                         <CheckCircle2 className="h-4 w-4" aria-hidden="true" />

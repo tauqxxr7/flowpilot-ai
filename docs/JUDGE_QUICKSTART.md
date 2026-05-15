@@ -6,7 +6,7 @@ Repository: https://github.com/tauqxxr7/flowpilot-ai
 
 1. `README.md` for the product story, screenshots, and architecture.
 2. `/dashboard` for operational value.
-3. `/` for the end-to-end workflow demo.
+3. `/workflow-lab` for the Live Workflow Replay.
 4. `/tickets` for persisted workflow output.
 5. `docs/ARCHITECTURE.md` and `docs/TECHNICAL_DECISIONS.md` for engineering depth.
 
@@ -40,7 +40,7 @@ http://127.0.0.1:3000
 ## Best Demo Prompt
 
 ```text
-Our dashboard automation failed three times and the customer is threatening to escalate.
+We were charged twice and need a refund before renewal.
 ```
 
-This shows intent detection, retrieval, confidence scoring, escalation routing, ticket creation, and dashboard impact.
+This shows intent detection, retrieval, confidence scoring, ticket routing, source citations, timeline replay, and dashboard impact.

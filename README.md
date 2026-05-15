@@ -15,6 +15,8 @@ Repository: https://github.com/tauqxxr7/flowpilot-ai
 
 FlowPilot AI is an AI-powered business workflow orchestration platform that combines retrieval-augmented intelligence, workflow routing, and operational analytics to help businesses automate support and decision workflows.
 
+![FlowPilot AI workflow replay](assets/screenshots/workflow-lab.png)
+
 Most business bots answer questions. FlowPilot AI goes further: it understands the customer issue, retrieves the right business context, decides the next workflow action, and updates the operations dashboard. The product is intentionally not positioned as a chatbot; it is a workflow system for support, sales, onboarding, complaints, escalation handling, and operations teams.
 
 ## Problem Statement
@@ -23,7 +25,7 @@ Support and operations teams deal with repeated customer issues every day: refun
 
 That gap creates operational risk. A refund request needs billing review. A complaint with churn language needs ownership. A sales inquiry should move to the sales queue. A product issue needs enough context for support or engineering. FlowPilot AI is built around that next-action problem.
 
-## Why Existing Chatbots Fail
+## Why FlowPilot AI Is Not Just A Chatbot
 
 Most chatbot demos are built around one text box and one generated response. Real business workflows need more structure:
 
@@ -35,6 +37,8 @@ Most chatbot demos are built around one text box and one generated response. Rea
 - dashboard visibility for operators
 
 FlowPilot AI treats the customer message as the beginning of an operational workflow, not the end of a chat exchange.
+
+The standout feature is Live Workflow Replay: every query produces a visible decision timeline from customer message to retrieved sources, confidence scoring, workflow route, ticket creation, and dashboard update.
 
 ## What FlowPilot AI Does
 
@@ -167,7 +171,7 @@ Set `GEMINI_API_KEY` in `backend/.env`. The demo still works without it using th
 
 ## Demo Walkthrough
 
-Target duration: 3 minutes.
+Target duration: 2 minutes.
 
 1. Open `/dashboard` and frame the project: FlowPilot AI is an operations workflow platform, not a chatbot.
 2. Open `/knowledge-base` and show seeded company context. Optionally upload a small `.txt` policy note.

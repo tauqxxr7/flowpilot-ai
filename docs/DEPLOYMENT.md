@@ -4,6 +4,11 @@ FlowPilot AI is prepared for split deployment: frontend on Vercel and backend on
 
 ## Frontend: Vercel
 
+1. Import the GitHub repository into Vercel.
+2. Set the project root directory to `frontend`.
+3. Add the backend URL as `NEXT_PUBLIC_API_URL`.
+4. Deploy.
+
 Root directory:
 
 ```text
@@ -34,6 +39,12 @@ The frontend reads `NEXT_PUBLIC_API_URL` first and falls back to `NEXT_PUBLIC_AP
 
 The backend includes `backend/render.yaml`.
 
+1. Create a new Render web service from the GitHub repository.
+2. Use `backend` as the root directory.
+3. Use the build and start commands below.
+4. Set `FLOWPILOT_ALLOWED_ORIGINS` to the deployed Vercel URL.
+5. Add `GEMINI_API_KEY` only if live Gemini responses are needed.
+
 Root directory:
 
 ```text
@@ -60,6 +71,12 @@ GEMINI_API_KEY=optional
 ```
 
 `GEMINI_API_KEY` is optional. The backend has a deterministic fallback response path so the demo works without a model key.
+
+Health check:
+
+```text
+/health
+```
 
 ## Backend: Railway
 
