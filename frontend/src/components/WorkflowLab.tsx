@@ -4,6 +4,7 @@ import { GitBranch, Play } from "lucide-react";
 import { useState } from "react";
 import { WorkflowDecision, routeWorkflow } from "@/lib/api";
 import { StatusBadge } from "./StatusBadge";
+import { WorkflowSteps } from "./WorkflowSteps";
 
 const intents = ["refund", "pricing", "product support", "onboarding", "complaint", "sales inquiry"];
 
@@ -52,6 +53,7 @@ export function WorkflowLab() {
           <h2 className="text-lg font-semibold">Routing result</h2>
           {decision ? (
             <div className="mt-4 space-y-4">
+              <WorkflowSteps />
               <div className="flex flex-wrap gap-2">
                 <StatusBadge value={decision.action} />
                 <StatusBadge value={decision.priority} />

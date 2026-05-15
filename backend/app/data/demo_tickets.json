@@ -1,0 +1,72 @@
+[
+  {
+    "id": "FP-DEMO01",
+    "customer_name": "Acme Retail Ops",
+    "channel": "web",
+    "message": "We were charged twice after renewal and need the billing team to review this before the next invoice.",
+    "intent": "refund",
+    "confidence": 0.82,
+    "response": "Matched as a refund case. The billing record should be reviewed before promising a refund, and the ticket should be assigned to Finance Operations.",
+    "action": "create_ticket",
+    "priority": "medium",
+    "owner": "Finance Operations",
+    "response_time_seconds": 0.011,
+    "workflow_reason": "Refund requests need billing validation before a final promise is made."
+  },
+  {
+    "id": "FP-DEMO02",
+    "customer_name": "Northstar Logistics",
+    "channel": "email",
+    "message": "Our dashboard automation failed three times and the customer is threatening to escalate.",
+    "intent": "product support",
+    "confidence": 0.94,
+    "response": "Matched as a product support case with escalation risk. The customer should receive an acknowledgement and a support lead should own the next update.",
+    "action": "escalate_to_human",
+    "priority": "high",
+    "owner": "Support Lead",
+    "response_time_seconds": 0.014,
+    "workflow_reason": "Customer risk language or low automation confidence requires a human owner."
+  },
+  {
+    "id": "FP-DEMO03",
+    "customer_name": "BrightPath SaaS",
+    "channel": "web",
+    "message": "A 250 person company wants pricing for a pilot with CRM integration and admin onboarding.",
+    "intent": "pricing",
+    "confidence": 0.7,
+    "response": "Matched as a pricing and sales inquiry. The sales team should capture company size, integration requirements, and pilot timeline.",
+    "action": "send_follow_up",
+    "priority": "medium",
+    "owner": "Sales",
+    "response_time_seconds": 0.009,
+    "workflow_reason": "Commercial context should be captured and routed to sales with the source message."
+  },
+  {
+    "id": "FP-DEMO04",
+    "customer_name": "Foundry Labs",
+    "channel": "support_portal",
+    "message": "The new admin cannot activate the first workflow after import.",
+    "intent": "onboarding",
+    "confidence": 0.7,
+    "response": "Matched as an onboarding blocker. Customer Success should help complete workspace setup and first workflow activation.",
+    "action": "auto_resolve",
+    "priority": "low",
+    "owner": "AI Operations Queue",
+    "response_time_seconds": 0.008,
+    "workflow_reason": "The retrieved support context is enough to give a grounded first response."
+  },
+  {
+    "id": "FP-DEMO05",
+    "customer_name": "HelioWorks",
+    "channel": "email",
+    "message": "The customer is unhappy about repeated delays and is considering churn.",
+    "intent": "complaint",
+    "confidence": 0.82,
+    "response": "Matched as a complaint with churn risk. The customer should be assigned an owner and tracked until closure.",
+    "action": "mark_high_risk_customer",
+    "priority": "high",
+    "owner": "Customer Success",
+    "response_time_seconds": 0.012,
+    "workflow_reason": "Complaint language should be tracked until closure to reduce churn risk."
+  }
+]

@@ -28,6 +28,13 @@
     "content": "Product support tickets related to failed automations, dashboard sync delays, or integration errors should include the workspace ID, reproduction steps, error timestamp, and affected workflow. Integration outages and repeated automation failures should be escalated to engineering."
   },
   {
+    "id": "fz-sla-001",
+    "title": "Support SLA Policy",
+    "source": "FlowZint customer operations SLA seed",
+    "category": "sla",
+    "content": "High priority support issues should receive a first response within four business hours. Escalated integration failures should be assigned to a support lead and reviewed by engineering when multiple customers or repeated workflow failures are involved."
+  },
+  {
     "id": "fz-complaint-001",
     "title": "Complaint Handling Guideline",
     "source": "FlowZint operations policy seed",

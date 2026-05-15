@@ -1,6 +1,6 @@
 # Presentation Script
 
-## Intro
+## 30-Second Intro
 
 Hi, we are CodingGiants. Our project is FlowPilot AI, an AI-powered business workflow orchestration platform for the FlowZint AI Hackathon 2026.
 
@@ -12,7 +12,7 @@ Support and sales teams repeatedly handle refund requests, pricing questions, on
 
 That is the gap FlowPilot AI addresses.
 
-## Demo Narration
+## 3-Minute Demo Narration
 
 First, open the Knowledge Base page. This shows the business context FlowPilot can retrieve from. For the live demo, we can upload a small text policy note, but the repository also ships with seeded FlowZint-style support, pricing, onboarding, complaint, refund, and sales policies.
 

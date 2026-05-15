@@ -53,6 +53,7 @@ The MVP includes seeded FlowZint-style operating knowledge for pricing, refunds,
 - SQLite ticket and workflow log persistence
 - Operations dashboard with ticket volume, escalation count, response time, confidence distribution, category breakdown, and recent activity
 - Admin-style pages for knowledge, tickets, and workflow testing
+- Seeded demo tickets and workflow logs so judges can inspect an operational dashboard immediately
 
 ## Architecture Overview
 
@@ -152,6 +153,8 @@ npm run dev
 ```
 
 The frontend runs on `http://localhost:3000`.
+
+Deployment notes are available in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 Optional Gemini setup:
 

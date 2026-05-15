@@ -2,6 +2,9 @@
 
 Repository: https://github.com/tauqxxr7/flowpilot-ai
 
+Live demo URL: _Add Vercel URL if deployed._
+Backend API URL: _Add Render or Railway URL if deployed._
+
 ## Run Instructions
 
 Backend:
@@ -83,3 +86,5 @@ Stored in `assets/screenshots`:
 - [ ] `npm run build` passes
 - [ ] Backend `/health` returns OK
 - [ ] Backend `/api/query` returns `ticket_id`, `intent`, `confidence`, `workflow`, and `sources`
+- [ ] `NEXT_PUBLIC_API_URL` points to the deployed backend in Vercel
+- [ ] `FLOWPILOT_ALLOWED_ORIGINS` includes the deployed frontend URL

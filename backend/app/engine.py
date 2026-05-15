@@ -183,6 +183,10 @@ def dashboard_stats() -> dict[str, Any]:
         sum(ticket["response_time_seconds"] for ticket in tickets) / total,
         3,
     ) if total else 0.0
+    avg_confidence = round(
+        sum(ticket["confidence"] for ticket in tickets) / total,
+        2,
+    ) if total else 0.0
 
     buckets = Counter()
     for ticket in tickets:
@@ -211,6 +215,7 @@ def dashboard_stats() -> dict[str, Any]:
         "resolved_by_ai": resolved,
         "escalated_tickets": escalated,
         "average_response_time_seconds": avg_response,
+        "average_confidence": avg_confidence,
         "confidence_distribution": dict(buckets),
         "category_breakdown": dict(categories),
         "recent_activity": recent,

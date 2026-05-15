@@ -56,6 +56,7 @@ export type DashboardStats = {
   resolved_by_ai: number;
   escalated_tickets: number;
   average_response_time_seconds: number;
+  average_confidence: number;
   confidence_distribution: Record<string, number>;
   category_breakdown: Record<string, number>;
   recent_activity: Array<Record<string, string>>;

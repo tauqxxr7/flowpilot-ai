@@ -1,12 +1,12 @@
 # Evaluation Alignment
 
-## Innovation & Creativity
+## Model Innovation & Novelty
 
-FlowPilot AI is positioned as an AI operations workflow system rather than a generic chatbot. It combines intent classification, retrieval, decision routing, ticket creation, and dashboard analytics in one flow.
+FlowPilot AI is positioned as an AI operations workflow system rather than a generic chatbot. It combines intent detection, retrieval, decision routing, ticket creation, and dashboard analytics in one flow.
 
-## Real-World Problem Solving
+## Real-World Applicability
 
-Support and sales teams lose time on repeated questions, refund triage, onboarding blockers, and escalation routing. FlowPilot AI reduces that repetitive workload while keeping human review for risky cases.
+Support and sales teams lose time on repeated questions, refund triage, onboarding blockers, and escalation routing. FlowPilot AI reduces repetitive triage while keeping human review for risky cases.
 
 ## Technical Architecture
 
@@ -15,12 +15,12 @@ The MVP includes:
 - Next.js frontend
 - FastAPI backend
 - SQLite persistence
-- local vector-style retrieval using TF-IDF
+- local retrieval using TF-IDF
 - optional Gemini response generation
 - ticket and workflow logging
 - analytics endpoints for the dashboard
 
-## Documentation & Presentation
+## Documentation Clarity
 
 The repository includes setup instructions, architecture notes, a demo script, evaluation alignment, and submission notes. Screenshots can be added after running the final local demo.
 

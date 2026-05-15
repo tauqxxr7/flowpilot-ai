@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import uuid
 from contextlib import asynccontextmanager
+import os
 
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -9,6 +10,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.engine import dashboard_stats, handle_query, route_workflow
 from app.schemas import DashboardStats, QueryRequest, QueryResponse, RouteRequest, WorkflowDecision
 from app.storage import add_document, init_db, list_documents, list_tickets, list_workflow_logs
+
+
+def allowed_origins() -> list[str]:
+    configured = os.getenv("FLOWPILOT_ALLOWED_ORIGINS")
+    if configured:
+        return [origin.strip() for origin in configured.split(",") if origin.strip()]
+    return [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
 
 
 @asynccontextmanager
@@ -26,7 +37,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=allowed_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -9,6 +9,7 @@ from typing import Any
 
 BASE_DIR = Path(__file__).resolve().parent
 SEED_PATH = BASE_DIR / "data" / "flowzint_seed.json"
+DEMO_TICKETS_PATH = BASE_DIR / "data" / "demo_tickets.json"
 DB_PATH = Path(os.getenv("FLOWPILOT_DB_PATH", BASE_DIR.parent / "flowpilot.db"))
 
 
@@ -57,6 +58,7 @@ def init_db() -> None:
         )
 
     seed_documents()
+    seed_demo_tickets()
 
 
 def seed_documents() -> None:
@@ -71,6 +73,52 @@ def seed_documents() -> None:
                 VALUES (?, ?, ?, ?, ?)
                 """,
                 (doc["id"], doc["title"], doc["source"], doc["category"], doc["content"]),
+            )
+
+
+def seed_demo_tickets() -> None:
+    with DEMO_TICKETS_PATH.open("r", encoding="utf-8") as file:
+        tickets = json.load(file)
+
+    with get_connection() as conn:
+        for ticket in tickets:
+            conn.execute(
+                """
+                INSERT OR IGNORE INTO tickets (
+                    id, customer_name, channel, message, intent, confidence, response,
+                    action, priority, owner, response_time_seconds
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    ticket["id"],
+                    ticket["customer_name"],
+                    ticket["channel"],
+                    ticket["message"],
+                    ticket["intent"],
+                    ticket["confidence"],
+                    ticket["response"],
+                    ticket["action"],
+                    ticket["priority"],
+                    ticket["owner"],
+                    ticket["response_time_seconds"],
+                ),
+            )
+            conn.execute(
+                """
+                INSERT INTO workflow_logs (ticket_id, action, reason)
+                SELECT ?, ?, ?
+                WHERE NOT EXISTS (
+                    SELECT 1 FROM workflow_logs WHERE ticket_id = ? AND action = ?
+                )
+                """,
+                (
+                    ticket["id"],
+                    ticket["action"],
+                    ticket["workflow_reason"],
+                    ticket["id"],
+                    ticket["action"],
+                ),
             )
 
 

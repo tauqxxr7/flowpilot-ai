@@ -4,6 +4,7 @@ import { Loader2, Send } from "lucide-react";
 import { useState } from "react";
 import { QueryResponse, submitQuery } from "@/lib/api";
 import { StatusBadge } from "./StatusBadge";
+import { WorkflowSteps } from "./WorkflowSteps";
 
 const samplePrompts = [
   { label: "Refund", value: "We were charged twice and the client is asking for a refund before renewal." },
@@ -81,6 +82,7 @@ export function CopilotConsole() {
         <h2 className="text-lg font-semibold">Decision Output</h2>
         {result ? (
           <div className="mt-4 space-y-4">
+            <WorkflowSteps />
             <div className="grid grid-cols-2 gap-3">
               <div className="rounded-md bg-panel p-3">
                 <p className="text-xs text-gray-500">Intent</p>

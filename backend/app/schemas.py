@@ -44,6 +44,7 @@ class DashboardStats(BaseModel):
     resolved_by_ai: int
     escalated_tickets: int
     average_response_time_seconds: float
+    average_confidence: float
     confidence_distribution: dict[str, int]
     category_breakdown: dict[str, int]
     recent_activity: list[dict]

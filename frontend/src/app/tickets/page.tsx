@@ -24,6 +24,7 @@ export default async function TicketsPage() {
                 <th className="px-4 py-3">Intent</th>
                 <th className="px-4 py-3">Action</th>
                 <th className="px-4 py-3">Owner</th>
+                <th className="px-4 py-3">Priority</th>
                 <th className="px-4 py-3">Confidence</th>
               </tr>
             </thead>
@@ -35,6 +36,7 @@ export default async function TicketsPage() {
                   <td className="px-4 py-4 capitalize">{ticket.intent}</td>
                   <td className="px-4 py-4"><StatusBadge value={ticket.action} /></td>
                   <td className="px-4 py-4">{ticket.owner}</td>
+                  <td className="px-4 py-4"><StatusBadge value={ticket.priority} /></td>
                   <td className="px-4 py-4 font-mono">{Math.round(ticket.confidence * 100)}%</td>
                 </tr>
               ))}
