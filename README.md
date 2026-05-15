@@ -159,7 +159,37 @@ npm run dev
 
 The frontend runs on `http://localhost:3000`.
 
-Deployment notes are available in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
+## Deployment
+
+Backend: Render  
+Frontend: Vercel  
+Production smoke test: [docs/PRODUCTION_SMOKE_TEST.md](docs/PRODUCTION_SMOKE_TEST.md)
+
+Submission format:
+
+```text
+Live Demo: <Vercel URL>
+GitHub: https://github.com/tauqxxr7/flowpilot-ai
+```
+
+Render backend setup:
+
+```text
+Root directory: backend
+Build command: pip install -r requirements.txt
+Start command: uvicorn main:app --host 0.0.0.0 --port $PORT
+Environment: FLOWPILOT_ALLOWED_ORIGINS=https://your-vercel-app.vercel.app
+```
+
+Vercel frontend setup:
+
+```text
+Root directory: frontend
+Build command: npm run build
+Environment: NEXT_PUBLIC_API_URL=https://your-render-service.onrender.com
+```
+
+Full deployment notes are available in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 Optional Gemini setup:
 
