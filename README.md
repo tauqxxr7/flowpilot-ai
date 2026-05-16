@@ -38,7 +38,7 @@ Most chatbot demos are built around one text box and one generated response. Rea
 
 FlowPilot AI treats the customer message as the beginning of an operational workflow, not the end of a chat exchange.
 
-The standout feature is Workflow Replay: every query produces a visible decision trail from customer message to retrieved sources, confidence scoring, route selection, ticket creation, and dashboard update.
+The standout feature is Live Workflow Replay: every query produces a visible decision trail from customer message to retrieved sources, confidence scoring, route selection, ticket creation, and dashboard update.
 
 ## What FlowPilot AI Does
 
@@ -48,7 +48,7 @@ The MVP includes seeded FlowZint-style operating knowledge for pricing, refunds,
 
 ## Core Features
 
-- Workflow Replay: a step-by-step decision trail showing how a customer issue becomes a routed support case
+- Live Workflow Replay: a step-by-step decision trail showing how a customer issue becomes a routed support case
 - Knowledge base with seeded FlowZint-style policies and admin upload endpoint
 - Customer query intake for support and sales issues
 - Intent detection for refund, pricing, product support, onboarding, complaint, escalation, and sales inquiry patterns
@@ -66,7 +66,7 @@ The MVP includes seeded FlowZint-style operating knowledge for pricing, refunds,
 
 The backend owns the workflow pipeline. The frontend is an operations console that shows the result of that pipeline in a way a support lead or hackathon judge can inspect quickly.
 
-## AI Workflow Pipeline
+## Workflow Pipeline
 
 1. Customer issue arrives through the intake console.
 2. Backend detects intent from the message.
@@ -170,7 +170,7 @@ Render backend setup:
 Root directory: backend
 Build command: pip install -r requirements.txt
 Start command: uvicorn main:app --host 0.0.0.0 --port $PORT
-Environment: FLOWPILOT_ALLOWED_ORIGINS=https://your-vercel-app.vercel.app
+Environment: FLOWPILOT_ALLOWED_ORIGINS=<Vercel frontend URL>
 ```
 
 Vercel frontend setup:
@@ -178,7 +178,7 @@ Vercel frontend setup:
 ```text
 Root directory: frontend
 Build command: npm run build
-Environment: NEXT_PUBLIC_API_URL=https://your-render-service.onrender.com
+Environment: NEXT_PUBLIC_API_URL=<Render backend URL>
 ```
 
 Full deployment notes are available in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
@@ -206,7 +206,7 @@ Target duration: 2 minutes.
 
 ## Judging Criteria Alignment
 
-- Innovation & Creativity: FlowPilot combines retrieval, intent detection, AI decision support, workflow routing, ticket creation, and analytics. The submission is an operations system rather than a chatbot wrapper.
+- Innovation & Creativity: FlowPilot combines source lookup, intent detection, decision support, workflow routing, ticket creation, and analytics. The submission is an operations system rather than a chatbot wrapper.
 - Real-World Problem Solving: The product reduces repetitive support triage while keeping risky cases visible for human teams.
 - Technical Architecture: The MVP has a Next.js frontend, FastAPI backend, SQLite persistence, retrieval layer, optional Gemini integration, workflow rules, and dashboard APIs.
 - Documentation & Presentation: The repository includes screenshots, setup steps, architecture notes, demo script, final checklist, and evaluation alignment.

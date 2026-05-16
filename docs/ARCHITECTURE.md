@@ -1,26 +1,20 @@
 # FlowPilot AI Architecture
 
-FlowPilot AI is structured as a small but complete business operations system. The frontend is a Next.js console for operators, and the backend is a FastAPI service that owns knowledge retrieval, intent detection, workflow routing, ticket persistence, and dashboard analytics.
+FlowPilot AI is structured as a small but complete business operations system. The frontend is a Next.js console for operators, and the backend is a FastAPI service that owns source lookup, intent detection, workflow routing, ticket persistence, and dashboard analytics.
 
-```mermaid
-flowchart LR
-    A[Customer Query] --> B[Intent Classifier]
-    B --> C[Knowledge Retrieval]
-    C --> D[AI Decision Engine]
-    D --> E[Workflow Router]
-    E --> F[Ticket / Escalation]
-    F --> G[Analytics Dashboard]
-```
+![FlowPilot AI architecture diagram](../assets/architecture/flowpilot-architecture-final.png)
+
+The core path is: customer issue -> intent detection -> source lookup -> decision engine -> workflow router -> ticket or escalation -> dashboard review.
 
 ## Backend
 
-The backend starts with seeded FlowZint-style support, pricing, onboarding, sales, complaint, and refund content. Documents are stored in SQLite and retrieved using TF-IDF vector search for the MVP. This keeps the local demo stable without hiding the retrieval layer behind a fake response.
+The backend starts with seeded FlowZint-style support, pricing, onboarding, sales, complaint, and refund content. Documents are stored in SQLite and retrieved using TF-IDF vector search for the MVP. This keeps the local demo stable without hiding the source lookup layer behind a fake response.
 
 The query pipeline is:
 
 1. Receive customer issue through `POST /api/query`
 2. Detect business intent from the message
-3. Retrieve relevant knowledge snippets
+3. Retrieve relevant source snippets
 4. Generate a grounded response with Gemini when `GEMINI_API_KEY` is configured
 5. Fall back to a deterministic policy-based response when Gemini is unavailable
 6. Route the workflow action
@@ -31,11 +25,11 @@ The query pipeline is:
 
 The frontend exposes five judge-facing routes:
 
-- `/` for the main operations copilot
+- `/` for the main case intake console
 - `/dashboard` for metrics and recent activity
 - `/knowledge-base` for indexed policy data
 - `/tickets` for ticket history
-- `/workflow-lab` for testing routing decisions directly
+- `/workflow-lab` for replaying routing decisions directly
 
 ## Data Model
 

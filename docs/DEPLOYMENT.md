@@ -35,7 +35,7 @@ npm install
 Environment variable:
 
 ```text
-NEXT_PUBLIC_API_URL=https://your-render-service.onrender.com
+NEXT_PUBLIC_API_URL=<Render backend URL>
 ```
 
 The frontend reads `NEXT_PUBLIC_API_URL`. If it is not set, it falls back to `http://localhost:8000` for local development only.
@@ -84,7 +84,7 @@ uvicorn main:app --host 0.0.0.0 --port $PORT
 Environment variables:
 
 ```text
-FLOWPILOT_ALLOWED_ORIGINS=https://your-frontend-domain.vercel.app
+FLOWPILOT_ALLOWED_ORIGINS=<Vercel frontend URL>
 GEMINI_API_KEY=optional
 ```
 
