@@ -84,11 +84,13 @@ uvicorn main:app --host 0.0.0.0 --port $PORT
 Environment variables:
 
 ```text
+PYTHON_VERSION=3.11.9
 FLOWPILOT_ALLOWED_ORIGINS=<Vercel frontend URL>
 GEMINI_API_KEY=optional
 ```
 
 `GEMINI_API_KEY` is optional. The backend has a deterministic fallback response path so the demo works without a model key.
+Render should use Python `3.11.9`. The repository includes both `.python-version` and `runtime.txt`, but also set `PYTHON_VERSION=3.11.9` in Render's Environment tab.
 
 Health check:
 
