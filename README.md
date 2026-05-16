@@ -19,6 +19,10 @@ FlowPilot AI routes customer issues through an explainable support workflow, fro
 
 ![FlowPilot AI workflow replay](assets/screenshots/workflow-lab.png)
 
+## Live Demo Preview
+
+![FlowPilot AI workflow replay demo](assets/demo/flowpilot-demo.gif)
+
 Most business bots stop at a reply. FlowPilot keeps going: it checks business context, chooses the next route, records the ticket, and updates the operations dashboard. The demo is built around support, sales, onboarding, complaints, escalation review, and handoff queues.
 
 ## Problem Statement
