@@ -1,92 +1,62 @@
 # Final Submission Checklist
 
-Repository: https://github.com/tauqxxr7/flowpilot-ai
-
-Live demo URL: https://flowpilot-ai-one.vercel.app
-Backend health: https://flowpilot-ai-zndh.onrender.com/health
-Backend API URL: https://flowpilot-ai-zndh.onrender.com
+Live Demo: https://flowpilot-ai-one.vercel.app  
+Backend Health: https://flowpilot-ai-zndh.onrender.com/health  
+Backend API: https://flowpilot-ai-zndh.onrender.com  
 GitHub: https://github.com/tauqxxr7/flowpilot-ai
 
-## Run Instructions
+## Confirmed Production Routes
 
-Backend:
+- [x] Dashboard: https://flowpilot-ai-one.vercel.app/dashboard
+- [x] Tickets: https://flowpilot-ai-one.vercel.app/tickets
+- [x] Knowledge Base: https://flowpilot-ai-one.vercel.app/knowledge-base
+- [x] Workflow Lab: https://flowpilot-ai-one.vercel.app/workflow-lab
 
-```powershell
-cd backend
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
+## Confirmed Workflow Test
+
+Prompt:
+
+```text
+We were charged twice and need a refund before renewal.
 ```
 
-Frontend:
+Verified on production:
 
-```powershell
-cd frontend
-npm install
-$env:NEXT_PUBLIC_API_URL='http://127.0.0.1:8000'
-npm run dev
-```
+- [x] intent appears
+- [x] confidence appears
+- [x] ticket ID appears
+- [x] source snippets appear
+- [x] workflow replay appears
+- [x] no visible frontend error
+- [x] no backend/CORS error
 
-Production build check:
+Backend API evidence:
 
-```powershell
-cd frontend
-npm run build
+```text
+GET /health -> ok
+POST /api/query -> refund intent, create_ticket action, 0.82 confidence, ticket ID, 3 sources, 8 replay steps
 ```
 
 ## Demo Flow
 
-1. Open `/` and introduce FlowPilot AI as a workflow orchestration platform, not a chatbot.
-2. Open `/knowledge-base` and show seeded company context. Optionally upload a small `.txt` policy note.
-3. Run the refund prompt and point out intent, confidence, source snippets, ticket ID, owner, and workflow action.
-4. Run the escalation prompt and show that risk language routes to a human owner.
-5. Open `/dashboard` and show category, confidence, escalation, and recent activity metrics.
-6. Open `/tickets` and show persisted ticket history.
-7. Open `https://flowpilot-ai-one.vercel.app/workflow-lab` and test the live workflow replay.
-
-## Architecture Summary
-
-FlowPilot AI follows this pipeline:
-
-```text
-Customer Query
--> Intent Detection
--> Knowledge Retrieval
--> AI Decision Engine
--> Workflow Router
--> Ticket / Escalation
--> Dashboard Analytics
-```
-
-The backend owns the workflow logic and persistence. The frontend presents the workflow as an operations console for support, sales, and customer success teams.
-
-## Evaluation Criteria Mapping
-
-- Innovation & Creativity: The project combines retrieval, routing, tickets, and analytics into one workflow system.
-- Real-World Problem Solving: It reduces repetitive support triage while escalating risky cases to humans.
-- Technical Architecture: It uses Next.js, FastAPI, SQLite, retrieval, Gemini integration hook, and API-driven dashboard pages.
-- Documentation & Presentation: README, screenshots, architecture notes, setup docs, demo script, and this checklist are included.
-
-## Screenshots Checklist
-
-Stored in `assets/screenshots`:
-
-- `copilot.png`
-- `dashboard.png`
-- `workflow-lab.png`
-- `tickets.png`
-- `knowledge-base.png`
+1. Open dashboard.
+2. Open knowledge base.
+3. Open workflow lab.
+4. Run the refund query.
+5. Zoom into routing result.
+6. Show workflow replay / decision trail.
+7. Open tickets.
+8. Close with: "Intent detection -> source lookup -> decision engine -> workflow router -> ticket/escalation -> dashboard review."
 
 ## Final Repo Hygiene
 
-- [ ] Repository is public
-- [ ] `README.md` renders correctly on GitHub
-- [ ] Screenshots render in README
-- [ ] `.env.example` exists for backend and frontend
-- [ ] `venv`, `node_modules`, `.next`, `__pycache__`, and SQLite DB files are ignored
-- [ ] `npm run build` passes
-- [ ] Backend `/health` returns OK
-- [ ] Backend `/api/query` returns `ticket_id`, `intent`, `confidence`, `workflow`, and `sources`
-- [ ] `NEXT_PUBLIC_API_URL` points to `https://flowpilot-ai-zndh.onrender.com` in Vercel
-- [ ] `FLOWPILOT_ALLOWED_ORIGINS` includes `https://flowpilot-ai-one.vercel.app` in Render
+- [x] Repository is public
+- [x] README contains live demo and backend health links
+- [x] `.env.example` exists for backend and frontend
+- [x] `NEXT_PUBLIC_API_URL` points to `https://flowpilot-ai-zndh.onrender.com` in Vercel
+- [x] `FLOWPILOT_ALLOWED_ORIGINS` includes `https://flowpilot-ai-one.vercel.app` in Render
+- [x] `venv`, `node_modules`, `.next`, `__pycache__`, and SQLite DB files are ignored
+
+## Freeze Warning
+
+No more feature changes unless something is broken. From here, only deploy fixes, documentation corrections, or emergency bug fixes should be made.

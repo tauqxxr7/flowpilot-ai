@@ -1,38 +1,40 @@
 # Demo Video Guide
 
-Target length: 2 minutes.
+Target length: 60-90 seconds.
 
-## Recording Flow
+## Opening Line
 
-Open the live demo at `https://flowpilot-ai-one.vercel.app/workflow-lab` for the main workflow replay shot.
+"Most AI support bots only reply. FlowPilot AI routes a customer issue through an explainable support workflow."
 
-1. Dashboard first.
-   - Show operational context: tickets processed, escalations, confidence, category distribution, and recent activity.
-2. Knowledge Base.
-   - Show that FlowPilot works from business documents and policy context.
-3. Workflow Lab: `https://flowpilot-ai-one.vercel.app/workflow-lab`.
-   - Prompt: `We were charged twice and need a refund before renewal.`
+## Recording Plan
+
+1. Open dashboard: `https://flowpilot-ai-one.vercel.app/dashboard`
+   - Show ticket volume, escalations, confidence, category mix, and recent workflow activity.
+2. Open knowledge base: `https://flowpilot-ai-one.vercel.app/knowledge-base`
+   - Show the business context used for source-backed responses.
+3. Open workflow lab: `https://flowpilot-ai-one.vercel.app/workflow-lab`
+   - Enter: `We were charged twice and need a refund before renewal.`
    - Click `Run replay`.
-4. Zoom into Live Workflow Replay.
-   - Show each step: query received, intent detected, sources retrieved, decision generated, confidence scored, route selected, ticket created, dashboard updated.
-5. Source cards.
-   - Show retrieved policy snippets and explain grounding.
-6. Tickets page.
-   - Show persisted workflow output.
-7. Architecture close.
-   - Say: "Customer query to retrieval, decision engine, workflow router, ticket or escalation, and dashboard analytics."
+4. Zoom into the routing result.
+   - Point out intent, confidence, ticket ID, route/action, owner, and source count.
+5. Show Workflow Replay / decision trail.
+   - Explain that each step is visible: query received, intent detected, source lookup, decision, confidence, route, ticket, dashboard update.
+6. Open tickets: `https://flowpilot-ai-one.vercel.app/tickets`
+   - Show the persisted ticket handoff.
+7. Close with the architecture line:
+   - "Intent detection -> source lookup -> decision engine -> workflow router -> ticket/escalation -> dashboard review."
 
 ## What To Emphasize
 
-- This is not a chatbot UI.
-- The workflow replay is explainable and auditable.
-- The system routes work to business owners.
-- Confidence is used before automation.
-- Demo data is labelled honestly as MVP seed data.
+- This is not a chatbot screen.
+- Workflow Replay makes the route explainable and auditable.
+- Confidence is visible before action is taken.
+- Source snippets show the response is grounded in business context.
+- Demo data is honest MVP seed data, not fake production usage.
 
 ## Recording Tips
 
 - Keep browser zoom at 90% or 100%.
-- Use `https://flowpilot-ai-one.vercel.app/workflow-lab` as the main visual moment.
-- Avoid spending time in setup screens.
-- Do not claim production users or fake metrics.
+- Make `https://flowpilot-ai-one.vercel.app/workflow-lab` the main visual moment.
+- Avoid setup screens.
+- Do not add features during recording; the project is in final freeze.
