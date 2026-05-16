@@ -106,16 +106,16 @@ export function WorkflowLab() {
         </div>
         <div>
           <p className="page-kicker">Decision replay</p>
-          <h1 className="mt-1 text-2xl font-semibold tracking-tight">See how a customer issue becomes a workflow</h1>
-          <p className="mt-1 text-sm text-gray-600">The main judge demo: intent, evidence, route, ticket, and audit trail in one view.</p>
+          <h1 className="mt-1 text-xl font-semibold tracking-tight">Explainable workflow replay</h1>
+          <p className="mt-1 text-sm text-gray-600">Intent, evidence, route, ticket handoff, and review trail in one view.</p>
         </div>
       </div>
       <section className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="surface rounded-md p-6">
           <p className="page-kicker">Input</p>
-          <h2 className="mt-2 text-lg font-semibold">Customer issue</h2>
+          <h2 className="mt-2 text-base font-semibold">Customer issue</h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">
-            Run the same API used by the console. FlowPilot will show how the issue is classified, grounded, routed, and stored.
+            Run the same API used by the intake console. FlowPilot shows how the case is classified, grounded, routed, and stored.
           </p>
 
           <label className="mt-5 block text-sm font-semibold text-gray-700" htmlFor="message">Message context</label>
@@ -135,7 +135,7 @@ export function WorkflowLab() {
           <div className="mt-4 flex flex-wrap gap-3">
             <button type="button" onClick={runReplay} disabled={loading || !message.trim()} className="focus-ring inline-flex items-center gap-2 rounded-md bg-ink px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60">
               <Play className="h-4 w-4" aria-hidden="true" />
-              {loading ? "Running replay" : "Run workflow replay"}
+              {loading ? "Running replay" : "Run replay"}
             </button>
             <button
               type="button"
@@ -144,7 +144,7 @@ export function WorkflowLab() {
               className="focus-ring inline-flex items-center gap-2 rounded-md border border-line bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-60"
             >
               <RotateCcw className="h-4 w-4" aria-hidden="true" />
-              Replay Workflow
+              Replay timeline
             </button>
           </div>
           {error ? <p className="mt-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
@@ -152,8 +152,8 @@ export function WorkflowLab() {
         <div className="surface rounded-md p-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <h2 className="text-lg font-semibold">Decision Timeline</h2>
-              <p className="mt-1 text-sm text-gray-600">A visual audit trail from customer issue to routed workflow.</p>
+              <h2 className="text-base font-semibold">Workflow replay</h2>
+              <p className="mt-1 text-sm text-gray-600">A visual audit trail from customer issue to routed case.</p>
             </div>
             <button
               type="button"
@@ -162,7 +162,7 @@ export function WorkflowLab() {
               className="focus-ring inline-flex items-center justify-center gap-2 rounded-md border border-line bg-white px-3 py-2 text-xs font-semibold text-gray-700 transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-50"
             >
               <Clipboard className="h-4 w-4" aria-hidden="true" />
-              {copied ? "Copied" : "Copy Decision Summary"}
+              {copied ? "Copied" : "Copy summary"}
             </button>
           </div>
 
@@ -177,7 +177,7 @@ export function WorkflowLab() {
                   </div>
                   <StatusBadge value={result.workflow.action} />
                 </div>
-                <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                <div className="mt-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
                   <SummaryMetric label="Intent" value={result.intent} />
                   <SummaryMetric label="Confidence" value={`${Math.round(result.confidence * 100)}%`} />
                   <SummaryMetric label="Priority" value={result.workflow.priority} />
@@ -196,21 +196,21 @@ export function WorkflowLab() {
                 <p className="text-sm leading-6 text-gray-700">{result.response}</p>
                 <p className="mt-3 text-xs text-gray-500">{result.workflow.reason}</p>
               </div>
-              <div className="relative space-y-3 border-l border-line pl-4">
+              <div className="relative space-y-2 border-l border-line pl-4">
                 {result.decision_timeline.map((item) => (
-                  <article key={item.step} className={`relative rounded-md border bg-white p-4 transition ${activeStep >= item.step ? "border-accent/50" : "border-line"} hover:border-accent/60`}>
-                    <span className={`absolute -left-[23px] top-5 flex h-4 w-4 rounded-full border-2 border-white ${activeStep >= item.step ? "bg-accent" : "bg-gray-300"}`} />
+                  <article key={item.step} className={`relative rounded-md border bg-white p-3 transition ${activeStep >= item.step ? "border-accent/50 bg-white" : "border-line"} hover:border-accent/60`}>
+                    <span className={`absolute -left-[23px] top-5 flex h-4 w-4 rounded-full border-2 border-white transition ${activeStep >= item.step ? "bg-accent" : "bg-gray-300"}`} />
                     <div className="flex gap-3">
-                      <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${activeStep >= item.step ? "bg-emerald-50 text-accent" : "bg-gray-100 text-gray-400"}`}>
-                        <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
+                      <div className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition ${activeStep >= item.step ? "bg-emerald-50 text-accent" : "bg-gray-100 text-gray-400"}`}>
+                        <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
-                          <p className="font-semibold text-gray-900">{item.step}. {item.title}</p>
+                          <p className="text-sm font-semibold text-gray-900">{item.step}. {item.title}</p>
                           <StatusBadge value={item.status} />
                         </div>
                         <p className="mt-1 text-sm leading-6 text-gray-600">{item.description}</p>
-                        <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                        <div className="mt-2 grid gap-2 sm:grid-cols-2">
                           {Object.entries(item.metadata).map(([key, value]) => (
                             <div key={key} className="rounded-md border border-line bg-panel px-3 py-2">
                               <p className="text-[11px] uppercase tracking-wide text-gray-500">{key.replaceAll("_", " ")}</p>
@@ -227,7 +227,7 @@ export function WorkflowLab() {
                 ))}
               </div>
               <div>
-                <p className="text-sm font-semibold text-gray-700">Retrieved source cards</p>
+                <p className="text-sm font-semibold text-gray-700">Source-backed context</p>
                 <div className="mt-2 grid gap-3">
                   {result.sources.map((source) => (
                     <article key={source.id} className="rounded-md border border-line bg-panel p-3 transition hover:bg-white">
@@ -241,7 +241,7 @@ export function WorkflowLab() {
             </div>
           ) : (
             <p className="mt-4 rounded-md border border-dashed border-line bg-panel p-5 text-sm leading-6 text-gray-600">
-              Run a workflow replay to see the route, evidence, confidence threshold, ticket record, and dashboard update path.
+              Run a replay to see route selection, evidence, confidence threshold, ticket record, and dashboard update path.
             </p>
           )}
         </div>
@@ -254,7 +254,7 @@ function SummaryMetric({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-md border border-line bg-white px-3 py-2">
       <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">{label}</p>
-      <p className="mt-1 truncate text-sm font-semibold capitalize text-gray-900">{value}</p>
+      <p className="mt-1 truncate text-sm font-medium capitalize text-gray-900">{value}</p>
     </div>
   );
 }

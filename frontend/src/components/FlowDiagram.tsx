@@ -8,7 +8,7 @@ export function FlowDiagram() {
       <div className="mb-4 flex items-center justify-between gap-3">
         <div>
           <p className="page-kicker">Pipeline</p>
-          <h2 className="mt-1 text-lg font-semibold">How one message becomes an operations record</h2>
+          <h2 className="mt-1 text-base font-semibold">How one message becomes an operations record</h2>
         </div>
       </div>
       <div className="flex min-w-[860px] items-center gap-3">

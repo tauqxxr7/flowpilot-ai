@@ -2,7 +2,7 @@ import { BarChart3, Database, GitBranch, Inbox, MessageSquareText } from "lucide
 import Link from "next/link";
 
 const navItems = [
-  { href: "/", label: "Copilot", icon: MessageSquareText },
+  { href: "/", label: "Intake", icon: MessageSquareText },
   { href: "/dashboard", label: "Dashboard", icon: BarChart3 },
   { href: "/knowledge-base", label: "Knowledge", icon: Database },
   { href: "/tickets", label: "Tickets", icon: Inbox },
@@ -20,7 +20,7 @@ export function AppShell({ children }: Readonly<{ children: React.ReactNode }>) 
             </div>
             <div>
               <p className="text-lg font-semibold tracking-tight">FlowPilot AI</p>
-              <p className="text-xs text-gray-500">Support routing, audit trails, and ops analytics</p>
+              <p className="text-xs text-gray-500">Support routing and decision trails</p>
             </div>
           </Link>
           <nav className="flex flex-wrap gap-2">

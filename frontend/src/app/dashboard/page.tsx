@@ -18,7 +18,7 @@ export default async function DashboardPage() {
         </div>
         <div>
           <p className="page-kicker">Operations view</p>
-          <h1 className="mt-1 text-2xl font-semibold tracking-tight">Support workload, routes, and review risk</h1>
+          <h1 className="mt-1 text-xl font-semibold tracking-tight">Support workload, routes, and review risk</h1>
           <p className="mt-1 text-sm text-gray-600">Demo data plus live tickets created through the workflow API.</p>
         </div>
       </div>
@@ -54,7 +54,7 @@ export default async function DashboardPage() {
                 <StatusBadge value={item.priority} />
               </div>
             </div>
-          )) : <p className="text-sm text-gray-600">No tickets yet. Run a workflow from the Copilot page to populate this feed.</p>}
+          )) : <p className="text-sm text-gray-600">No tickets yet. Run a case from the intake page to populate this feed.</p>}
         </div>
       </Panel>
     </div>

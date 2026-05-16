@@ -36,10 +36,10 @@ export function CopilotConsole() {
       <div className="surface rounded-md p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="page-kicker">Workflow intake</p>
-            <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink">Convert a customer issue into a routed case</h1>
+            <p className="page-kicker">Case intake</p>
+            <h1 className="mt-2 text-2xl font-semibold tracking-tight text-ink">Route a customer issue to the right queue</h1>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-600">
-              FlowPilot reads the issue, checks business context, recommends a route, creates a ticket, and leaves a decision trail the team can review.
+              FlowPilot checks the saved policy context, recommends a route, creates a ticket, and leaves a decision trail for review.
             </p>
           </div>
         </div>
@@ -78,8 +78,8 @@ export function CopilotConsole() {
       </div>
 
       <div className="surface rounded-md p-6">
-        <h2 className="text-lg font-semibold">Decision output</h2>
-        <p className="mt-1 text-sm text-gray-600">The same response object powers tickets, replay, and dashboard analytics.</p>
+        <h2 className="text-base font-semibold">Routing result</h2>
+        <p className="mt-1 text-sm text-gray-600">Intent, confidence, owner, and source-backed response from the workflow API.</p>
         {result ? (
           <div className="mt-4 space-y-4">
             <WorkflowSteps />
@@ -116,7 +116,7 @@ export function CopilotConsole() {
           </div>
         ) : (
           <div className="mt-4 rounded-md border border-dashed border-line bg-panel p-5 text-sm leading-6 text-gray-600">
-            Submit a customer issue to see intent, retrieved policy context, route, ticket creation, and source citations.
+            Submit a customer issue to see intent, policy context, route, ticket handoff, and source citations.
           </div>
         )}
       </div>

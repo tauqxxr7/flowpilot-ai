@@ -13,7 +13,7 @@ export default async function KnowledgeBasePage() {
         </div>
         <div>
           <p className="page-kicker">Business context</p>
-          <h1 className="mt-1 text-2xl font-semibold tracking-tight">Policies used for retrieval and citations</h1>
+          <h1 className="mt-1 text-xl font-semibold tracking-tight">Policies used for retrieval and citations</h1>
           <p className="mt-1 text-sm text-gray-600">Seeded support rules and uploaded notes used to ground workflow decisions.</p>
         </div>
       </div>

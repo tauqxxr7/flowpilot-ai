@@ -13,7 +13,7 @@ export default async function TicketsPage() {
         </div>
         <div>
           <p className="page-kicker">Routed cases</p>
-          <h1 className="mt-1 text-2xl font-semibold tracking-tight">Ticket history and owner handoff</h1>
+          <h1 className="mt-1 text-xl font-semibold tracking-tight">Ticket history and owner handoff</h1>
           <p className="mt-1 text-sm text-gray-600">Each workflow run creates a ticket record with intent, route, owner, and confidence.</p>
         </div>
       </div>

@@ -1,6 +1,6 @@
 # FlowPilot AI
 
-Customer issue routing, source-grounded decisions, ticket handoff, and operations analytics for support teams.
+Customer issue routing and escalation with an explainable AI workflow replay.
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=nextdotjs)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
@@ -13,11 +13,11 @@ Track: Open Innovation
 Hackathon: FlowZint AI Hackathon 2026  
 Repository: https://github.com/tauqxxr7/flowpilot-ai
 
-FlowPilot AI converts customer issues into explainable business workflows. Instead of only generating a response, it retrieves business context, classifies intent, routes the case, creates a ticket, and shows the decision trail.
+FlowPilot AI routes customer issues through an explainable support workflow, from intent detection and source lookup to ticket creation, escalation, and dashboard review.
 
 ![FlowPilot AI workflow replay](assets/screenshots/workflow-lab.png)
 
-Most business bots stop at a reply. FlowPilot keeps going: it checks the right business context, chooses the next workflow action, records the ticket, and updates the operations dashboard. The demo is built around support, sales, onboarding, complaints, escalation handling, and review queues.
+Most business bots stop at a reply. FlowPilot keeps going: it checks business context, chooses the next route, records the ticket, and updates the operations dashboard. The demo is built around support, sales, onboarding, complaints, escalation review, and handoff queues.
 
 ## Problem Statement
 
@@ -38,21 +38,21 @@ Most chatbot demos are built around one text box and one generated response. Rea
 
 FlowPilot AI treats the customer message as the beginning of an operational workflow, not the end of a chat exchange.
 
-The standout feature is Live Workflow Replay: every query produces a visible decision timeline from customer message to retrieved sources, confidence scoring, route selection, ticket creation, and dashboard update.
+The standout feature is Workflow Replay: every query produces a visible decision trail from customer message to retrieved sources, confidence scoring, route selection, ticket creation, and dashboard update.
 
 ## What FlowPilot AI Does
 
-FlowPilot receives a customer issue, classifies the intent, retrieves relevant business knowledge, prepares a grounded response, decides the next workflow action, stores the ticket, and updates operational analytics.
+FlowPilot receives a customer issue, classifies the intent, retrieves relevant business knowledge, prepares a source-backed response, decides the next route, stores the ticket, and updates operational analytics.
 
 The MVP includes seeded FlowZint-style operating knowledge for pricing, refunds, onboarding, product support, complaints, and sales inquiries. Gemini can be used when `GEMINI_API_KEY` is configured, and the local fallback path keeps the demo stable when an API key is not available.
 
 ## Core Features
 
-- Live Workflow Replay: a step-by-step decision timeline showing how a customer issue becomes a routed business workflow
+- Workflow Replay: a step-by-step decision trail showing how a customer issue becomes a routed support case
 - Knowledge base with seeded FlowZint-style policies and admin upload endpoint
 - Customer query intake for support and sales issues
 - Intent detection for refund, pricing, product support, onboarding, complaint, escalation, and sales inquiry patterns
-- Retrieval-grounded response engine with cited snippets
+- Source-backed response engine with cited snippets
 - Workflow router with actions: auto-resolve, create ticket, escalate to human, send follow-up, mark high-risk customer
 - Confidence score and owner assignment for each workflow decision
 - SQLite ticket and workflow log persistence
@@ -68,10 +68,10 @@ The backend owns the workflow pipeline. The frontend is an operations console th
 
 ## AI Workflow Pipeline
 
-1. Customer issue arrives through the Copilot console.
+1. Customer issue arrives through the intake console.
 2. Backend detects intent from the message.
 3. Retrieval searches indexed business knowledge.
-4. AI decision engine prepares a grounded response using retrieved context.
+4. Decision engine prepares a source-backed response using retrieved context.
 5. Workflow router chooses the operational next step.
 6. Ticket and workflow log are stored.
 7. Dashboard analytics update from persisted records.
@@ -195,10 +195,10 @@ Set `GEMINI_API_KEY` in `backend/.env`. The demo still works without it using th
 
 Target duration: 2 minutes.
 
-1. Open `/dashboard` and frame the project: FlowPilot AI is an operations workflow platform, not a chatbot.
+1. Open `/dashboard` and frame the project: FlowPilot AI is a support workflow router, not a chatbot.
 2. Open `/knowledge-base` and show seeded company context. Optionally upload a small `.txt` policy note.
 3. Open `/workflow-lab` and run: `We were charged twice and need a refund before renewal.`
-4. Zoom into the Live Workflow Replay: customer query received, intent detected, sources retrieved, AI decision generated, confidence scored, route selected, ticket created, dashboard updated.
+4. Zoom into Workflow Replay: customer query received, intent detected, sources retrieved, confidence scored, route selected, ticket created, dashboard updated.
 5. Run the escalation prompt: `Our dashboard automation failed three times and the customer is threatening to escalate.`
 6. Show that risk language routes the workflow to a human owner instead of auto-resolving.
 7. Open `/tickets` to show persisted workflow history.
