@@ -34,7 +34,7 @@ export function KnowledgeUpload() {
     <form action={handleUpload} className="surface rounded-md p-5">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="text-lg font-semibold tracking-tight">Ingest Company Context</h2>
+          <h2 className="text-lg font-semibold tracking-tight">Add company context</h2>
           <p className="mt-1 text-sm text-gray-600">
             Upload a small FAQ, SOP, or policy text file for the retrieval layer to use in the next query.
           </p>
@@ -44,12 +44,12 @@ export function KnowledgeUpload() {
             name="file"
             type="file"
             accept=".txt,.md,.csv"
-            className="max-w-72 rounded-md border border-line bg-panel px-3 py-2 text-sm text-gray-700 file:mr-3 file:rounded-md file:border-0 file:bg-ink file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-white"
+            className="focus-ring max-w-72 rounded-md border border-line bg-panel px-3 py-2 text-sm text-gray-700 file:mr-3 file:rounded-md file:border-0 file:bg-ink file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-white"
           />
           <button
             type="submit"
             disabled={busy}
-            className="inline-flex items-center justify-center gap-2 rounded-md bg-ink px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
+            className="focus-ring inline-flex items-center justify-center gap-2 rounded-md bg-ink px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
           >
             <UploadCloud className="h-4 w-4" aria-hidden="true" />
             {busy ? "Indexing" : "Upload"}

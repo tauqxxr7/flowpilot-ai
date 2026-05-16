@@ -12,11 +12,14 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-3">
-        <BarChart3 className="h-6 w-6 text-accent" aria-hidden="true" />
+      <div className="flex items-start gap-3">
+        <div className="mt-1 rounded-md border border-line bg-white p-2">
+          <BarChart3 className="h-5 w-5 text-accent" aria-hidden="true" />
+        </div>
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Operations Dashboard</h1>
-          <p className="text-sm text-gray-600">Live view of AI resolution, escalation load, and workflow mix.</p>
+          <p className="page-kicker">Operations view</p>
+          <h1 className="mt-1 text-2xl font-semibold tracking-tight">Support workload, routes, and review risk</h1>
+          <p className="mt-1 text-sm text-gray-600">Demo data plus live tickets created through the workflow API.</p>
         </div>
       </div>
       <div className="grid metric-grid gap-4">
@@ -34,10 +37,10 @@ export default async function DashboardPage() {
           <Breakdown data={stats.confidence_distribution} />
         </Panel>
       </section>
-      <Panel title="Recent activity">
+      <Panel title="Recent workflow activity">
         <div className="space-y-3">
           {stats.recent_activity.length ? stats.recent_activity.map((item) => (
-            <div key={item.id} className="grid gap-3 rounded-md border border-line bg-panel p-3 transition hover:border-accent/60 md:grid-cols-[1fr_auto] md:items-center">
+            <div key={item.id} className="grid gap-3 rounded-md border border-line bg-panel p-3 transition hover:border-gray-300 hover:bg-white md:grid-cols-[1fr_auto] md:items-center">
               <div className="flex gap-3">
                 <div className="mt-1 h-2.5 w-2.5 rounded-full bg-accent" />
                 <div>
@@ -51,7 +54,7 @@ export default async function DashboardPage() {
                 <StatusBadge value={item.priority} />
               </div>
             </div>
-          )) : <p className="text-sm text-gray-600">No tickets yet. Run a workflow from the Copilot page.</p>}
+          )) : <p className="text-sm text-gray-600">No tickets yet. Run a workflow from the Copilot page to populate this feed.</p>}
         </div>
       </Panel>
     </div>

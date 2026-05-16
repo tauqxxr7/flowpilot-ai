@@ -1,6 +1,6 @@
 # FlowPilot AI
 
-AI-powered business workflow orchestration platform with RAG-based support automation, intelligent ticket routing, multi-agent decision flows, and operational analytics.
+Customer issue routing, source-grounded decisions, ticket handoff, and operations analytics for support teams.
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=nextdotjs)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
@@ -13,21 +13,21 @@ Track: Open Innovation
 Hackathon: FlowZint AI Hackathon 2026  
 Repository: https://github.com/tauqxxr7/flowpilot-ai
 
-FlowPilot AI is an AI-powered business workflow orchestration platform that combines retrieval-augmented intelligence, workflow routing, and operational analytics to help businesses automate support and decision workflows.
+FlowPilot AI converts customer issues into explainable business workflows. Instead of only generating a response, it retrieves business context, classifies intent, routes the case, creates a ticket, and shows the decision trail.
 
 ![FlowPilot AI workflow replay](assets/screenshots/workflow-lab.png)
 
-Most business bots answer questions. FlowPilot AI goes further: it understands the customer issue, retrieves the right business context, decides the next workflow action, and updates the operations dashboard. The product is intentionally not positioned as a chatbot; it is a workflow system for support, sales, onboarding, complaints, escalation handling, and operations teams.
+Most business bots stop at a reply. FlowPilot keeps going: it checks the right business context, chooses the next workflow action, records the ticket, and updates the operations dashboard. The demo is built around support, sales, onboarding, complaints, escalation handling, and review queues.
 
 ## Problem Statement
 
-Support and operations teams deal with repeated customer issues every day: refund requests, pricing questions, onboarding blockers, product failures, complaints, and escalation threats. A simple bot can draft a reply, but it usually does not know what should happen next.
+Support and operations teams deal with repeated customer issues every day: refund requests, pricing questions, onboarding blockers, product failures, complaints, and escalation threats. A simple bot can draft a reply, but it usually does not know where the case should go next.
 
 That gap creates operational risk. A refund request needs billing review. A complaint with churn language needs ownership. A sales inquiry should move to the sales queue. A product issue needs enough context for support or engineering. FlowPilot AI is built around that next-action problem.
 
 ## Why FlowPilot AI Is Not Just A Chatbot
 
-Most chatbot demos are built around one text box and one generated response. Real business workflows need more structure:
+Most chatbot demos are built around one text box and one generated response. Real support operations need more structure:
 
 - verified company context instead of loose guesses
 - source snippets that explain why a response was produced
@@ -38,11 +38,11 @@ Most chatbot demos are built around one text box and one generated response. Rea
 
 FlowPilot AI treats the customer message as the beginning of an operational workflow, not the end of a chat exchange.
 
-The standout feature is Live Workflow Replay: every query produces a visible decision timeline from customer message to retrieved sources, confidence scoring, workflow route, ticket creation, and dashboard update.
+The standout feature is Live Workflow Replay: every query produces a visible decision timeline from customer message to retrieved sources, confidence scoring, route selection, ticket creation, and dashboard update.
 
 ## What FlowPilot AI Does
 
-FlowPilot receives a customer issue, classifies the intent, retrieves relevant business knowledge, produces a grounded response, decides the next workflow action, stores the ticket, and updates operational analytics.
+FlowPilot receives a customer issue, classifies the intent, retrieves relevant business knowledge, prepares a grounded response, decides the next workflow action, stores the ticket, and updates operational analytics.
 
 The MVP includes seeded FlowZint-style operating knowledge for pricing, refunds, onboarding, product support, complaints, and sales inquiries. Gemini can be used when `GEMINI_API_KEY` is configured, and the local fallback path keeps the demo stable when an API key is not available.
 
@@ -62,7 +62,7 @@ The MVP includes seeded FlowZint-style operating knowledge for pricing, refunds,
 
 ## Architecture Overview
 
-![FlowPilot AI architecture diagram](assets/architecture/flowpilot-architecture.svg)
+![FlowPilot AI architecture diagram](assets/architecture/flowpilot-architecture-final.png)
 
 The backend owns the workflow pipeline. The frontend is an operations console that shows the result of that pipeline in a way a support lead or hackathon judge can inspect quickly.
 
@@ -76,19 +76,11 @@ The backend owns the workflow pipeline. The frontend is an operations console th
 6. Ticket and workflow log are stored.
 7. Dashboard analytics update from persisted records.
 
-## Screenshots
-
-### Landing / Copilot
-
-![FlowPilot AI copilot screen](assets/screenshots/copilot.png)
+## Selected Screenshots
 
 ### Dashboard
 
 ![FlowPilot AI dashboard screen](assets/screenshots/dashboard.png)
-
-### Workflow Lab
-
-![FlowPilot AI workflow lab screen](assets/screenshots/workflow-lab.png)
 
 ### Ticket Routing
 

@@ -7,11 +7,14 @@ export default async function TicketsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-3">
-        <Inbox className="h-6 w-6 text-accent" aria-hidden="true" />
+      <div className="flex items-start gap-3">
+        <div className="mt-1 rounded-md border border-line bg-white p-2">
+          <Inbox className="h-5 w-5 text-accent" aria-hidden="true" />
+        </div>
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Ticket History</h1>
-          <p className="text-sm text-gray-600">Every copilot run creates an auditable workflow record.</p>
+          <p className="page-kicker">Routed cases</p>
+          <h1 className="mt-1 text-2xl font-semibold tracking-tight">Ticket history and owner handoff</h1>
+          <p className="mt-1 text-sm text-gray-600">Each workflow run creates a ticket record with intent, route, owner, and confidence.</p>
         </div>
       </div>
       <section className="surface overflow-hidden rounded-md">
@@ -30,7 +33,7 @@ export default async function TicketsPage() {
             </thead>
             <tbody className="divide-y divide-line">
               {tickets.map((ticket) => (
-                <tr key={ticket.id} className="align-top transition hover:bg-panel">
+                <tr key={ticket.id} className="align-top transition hover:bg-panel/80">
                   <td className="px-4 py-4 font-mono font-semibold">{ticket.id}</td>
                   <td className="px-4 py-4">{ticket.customer_name}</td>
                   <td className="px-4 py-4 capitalize">{ticket.intent}</td>

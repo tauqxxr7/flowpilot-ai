@@ -25,24 +25,48 @@ const demoScenarios = [
 export function WorkflowLab() {
   const searchParams = useSearchParams();
   const demoStarted = useRef(false);
-  const [message, setMessage] = useState(demoScenarios[2].value);
+  const replayTimers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const [message, setMessage] = useState(demoScenarios[0].value);
   const [result, setResult] = useState<QueryResponse | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
+
+  function clearReplayTimers() {
+    replayTimers.current.forEach((timer) => clearTimeout(timer));
+    replayTimers.current = [];
+  }
+
+  function replayTimeline(itemCount = result?.decision_timeline.length ?? 0) {
+    if (!itemCount) {
+      return;
+    }
+    clearReplayTimers();
+    setActiveStep(0);
+    Array.from({ length: itemCount }).forEach((_, index) => {
+      replayTimers.current.push(setTimeout(() => setActiveStep(index + 1), index * 220));
+    });
+  }
 
   async function runReplay() {
     setError("");
     setLoading(true);
     setCopied(false);
+    clearReplayTimers();
+    setActiveStep(0);
     try {
-      setResult(await submitQuery(message, "Workflow Lab Demo"));
+      const response = await submitQuery(message, "Workflow Lab Demo");
+      setResult(response);
+      replayTimeline(response.decision_timeline.length);
     } catch {
       setError("Backend API is not reachable. Start FastAPI on port 8000 and try again.");
     } finally {
       setLoading(false);
     }
   }
+
+  useEffect(() => clearReplayTimers, []);
 
   useEffect(() => {
     if (demoStarted.current || searchParams.get("demo") !== "timeline") {
@@ -63,6 +87,7 @@ export function WorkflowLab() {
       `Action: ${result.workflow.action}`,
       `Owner: ${result.workflow.owner}`,
       `Priority: ${result.workflow.priority}`,
+      `Sources: ${result.sources.length}`,
       `Reason: ${result.workflow.reason}`,
     ].join("\n");
     try {
@@ -75,48 +100,56 @@ export function WorkflowLab() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-3">
-        <GitBranch className="h-6 w-6 text-accent" aria-hidden="true" />
+      <div className="flex items-start gap-3">
+        <div className="mt-1 rounded-md border border-line bg-white p-2">
+          <GitBranch className="h-5 w-5 text-accent" aria-hidden="true" />
+        </div>
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Workflow Lab</h1>
-          <p className="text-sm text-gray-600">Test routing decisions without creating a full customer ticket.</p>
+          <p className="page-kicker">Decision replay</p>
+          <h1 className="mt-1 text-2xl font-semibold tracking-tight">See how a customer issue becomes a workflow</h1>
+          <p className="mt-1 text-sm text-gray-600">The main judge demo: intent, evidence, route, ticket, and audit trail in one view.</p>
         </div>
       </div>
       <section className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr]">
-        <div className="surface rounded-md p-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Live workflow replay</p>
+        <div className="surface rounded-md p-6">
+          <p className="page-kicker">Input</p>
           <h2 className="mt-2 text-lg font-semibold">Customer issue</h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">
-            Run a real query through the same API used by the Copilot. FlowPilot will replay how the issue becomes a routed workflow.
+            Run the same API used by the console. FlowPilot will show how the issue is classified, grounded, routed, and stored.
           </p>
 
           <label className="mt-5 block text-sm font-semibold text-gray-700" htmlFor="message">Message context</label>
-          <textarea id="message" value={message} onChange={(event) => setMessage(event.target.value)} className="mt-2 min-h-32 w-full rounded-md border border-line bg-panel p-3 outline-none focus:border-accent focus:bg-white" />
+          <textarea id="message" value={message} onChange={(event) => setMessage(event.target.value)} className="focus-ring mt-2 min-h-32 w-full rounded-md border border-line bg-panel p-3 transition focus:border-accent focus:bg-white" />
           <div className="mt-3 flex flex-wrap gap-2">
             {demoScenarios.map((scenario) => (
               <button
                 key={scenario.label}
                 type="button"
                 onClick={() => setMessage(scenario.value)}
-                className="rounded-md border border-line bg-white px-3 py-2 text-xs font-semibold text-gray-600 transition hover:border-accent hover:text-accent"
+                className="focus-ring rounded-md border border-line bg-white px-3 py-2 text-xs font-semibold text-gray-600 transition hover:border-accent hover:text-accent"
               >
                 {scenario.label}
               </button>
             ))}
           </div>
           <div className="mt-4 flex flex-wrap gap-3">
-            <button type="button" onClick={runReplay} disabled={loading || !message.trim()} className="inline-flex items-center gap-2 rounded-md bg-ink px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60">
+            <button type="button" onClick={runReplay} disabled={loading || !message.trim()} className="focus-ring inline-flex items-center gap-2 rounded-md bg-ink px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60">
               <Play className="h-4 w-4" aria-hidden="true" />
               {loading ? "Running replay" : "Run workflow replay"}
             </button>
-            <button type="button" onClick={runReplay} disabled={loading || !message.trim()} className="inline-flex items-center gap-2 rounded-md border border-line bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-60">
+            <button
+              type="button"
+              onClick={() => result ? replayTimeline() : void runReplay()}
+              disabled={loading || (!result && !message.trim())}
+              className="focus-ring inline-flex items-center gap-2 rounded-md border border-line bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-60"
+            >
               <RotateCcw className="h-4 w-4" aria-hidden="true" />
               Replay Workflow
             </button>
           </div>
           {error ? <p className="mt-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
         </div>
-        <div className="surface rounded-md p-5">
+        <div className="surface rounded-md p-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <h2 className="text-lg font-semibold">Decision Timeline</h2>
@@ -126,7 +159,7 @@ export function WorkflowLab() {
               type="button"
               onClick={copySummary}
               disabled={!result}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-line bg-white px-3 py-2 text-xs font-semibold text-gray-700 transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-50"
+              className="focus-ring inline-flex items-center justify-center gap-2 rounded-md border border-line bg-white px-3 py-2 text-xs font-semibold text-gray-700 transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-50"
             >
               <Clipboard className="h-4 w-4" aria-hidden="true" />
               {copied ? "Copied" : "Copy Decision Summary"}
@@ -136,21 +169,24 @@ export function WorkflowLab() {
           {result ? (
             <div className="mt-4 space-y-4">
               <WorkflowSteps />
-              <div className="grid gap-3 md:grid-cols-3">
-                <div className="rounded-md border border-line bg-panel p-3">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Workflow action</p>
-                  <div className="mt-2"><StatusBadge value={result.workflow.action} /></div>
+              <div className="rounded-md border border-line bg-panel p-4">
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="page-kicker">Decision summary</p>
+                    <h3 className="mt-1 text-base font-semibold">Route selected for {result.ticket_id}</h3>
+                  </div>
+                  <StatusBadge value={result.workflow.action} />
                 </div>
-                <div className="rounded-md border border-line bg-panel p-3">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Confidence</p>
-                  <p className="mt-2 font-mono text-lg font-semibold">{Math.round(result.confidence * 100)}%</p>
-                </div>
-                <div className="rounded-md border border-line bg-panel p-3">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Owner</p>
-                  <p className="mt-2 text-sm font-semibold">{result.workflow.owner}</p>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                  <SummaryMetric label="Intent" value={result.intent} />
+                  <SummaryMetric label="Confidence" value={`${Math.round(result.confidence * 100)}%`} />
+                  <SummaryMetric label="Priority" value={result.workflow.priority} />
+                  <SummaryMetric label="Owner" value={result.workflow.owner} />
+                  <SummaryMetric label="Sources" value={String(result.sources.length)} />
+                  <SummaryMetric label="Route" value={result.workflow.action.replaceAll("_", " ")} />
                 </div>
               </div>
-              <div className="rounded-md border border-line bg-panel p-4">
+              <div className="rounded-md border border-line bg-white p-4">
                 <div className="mb-3 flex flex-wrap gap-2">
                   <StatusBadge value={result.workflow.priority} />
                   <span className="rounded-full border border-line bg-white px-2.5 py-1 text-xs font-semibold text-gray-700">
@@ -162,10 +198,10 @@ export function WorkflowLab() {
               </div>
               <div className="relative space-y-3 border-l border-line pl-4">
                 {result.decision_timeline.map((item) => (
-                  <article key={item.step} className="relative rounded-md border border-line bg-white p-4 transition hover:border-accent/60">
-                    <span className="absolute -left-[23px] top-5 flex h-4 w-4 rounded-full border-2 border-white bg-accent shadow-sm" />
+                  <article key={item.step} className={`relative rounded-md border bg-white p-4 transition ${activeStep >= item.step ? "border-accent/50" : "border-line"} hover:border-accent/60`}>
+                    <span className={`absolute -left-[23px] top-5 flex h-4 w-4 rounded-full border-2 border-white ${activeStep >= item.step ? "bg-accent" : "bg-gray-300"}`} />
                     <div className="flex gap-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-accent">
+                      <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${activeStep >= item.step ? "bg-emerald-50 text-accent" : "bg-gray-100 text-gray-400"}`}>
                         <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -176,7 +212,7 @@ export function WorkflowLab() {
                         <p className="mt-1 text-sm leading-6 text-gray-600">{item.description}</p>
                         <div className="mt-3 grid gap-2 sm:grid-cols-2">
                           {Object.entries(item.metadata).map(([key, value]) => (
-                            <div key={key} className="rounded-md bg-panel px-3 py-2">
+                            <div key={key} className="rounded-md border border-line bg-panel px-3 py-2">
                               <p className="text-[11px] uppercase tracking-wide text-gray-500">{key.replaceAll("_", " ")}</p>
                               <p className="mt-1 truncate text-sm font-medium text-gray-800">
                                 {Array.isArray(value) ? value.join(", ") : String(value)}
@@ -194,7 +230,7 @@ export function WorkflowLab() {
                 <p className="text-sm font-semibold text-gray-700">Retrieved source cards</p>
                 <div className="mt-2 grid gap-3">
                   {result.sources.map((source) => (
-                    <article key={source.id} className="rounded-md border border-line bg-panel p-3">
+                    <article key={source.id} className="rounded-md border border-line bg-panel p-3 transition hover:bg-white">
                       <p className="text-sm font-semibold">{source.title}</p>
                       <p className="mt-1 text-xs text-gray-500">{source.source} | score {source.score}</p>
                       <p className="mt-2 text-sm leading-5 text-gray-700">{source.snippet}</p>
@@ -205,11 +241,20 @@ export function WorkflowLab() {
             </div>
           ) : (
             <p className="mt-4 rounded-md border border-dashed border-line bg-panel p-5 text-sm leading-6 text-gray-600">
-              Run a workflow replay to see each decision step, retrieved context, confidence score, route selection, ticket creation, and dashboard update.
+              Run a workflow replay to see the route, evidence, confidence threshold, ticket record, and dashboard update path.
             </p>
           )}
         </div>
       </section>
+    </div>
+  );
+}
+
+function SummaryMetric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-md border border-line bg-white px-3 py-2">
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">{label}</p>
+      <p className="mt-1 truncate text-sm font-semibold capitalize text-gray-900">{value}</p>
     </div>
   );
 }

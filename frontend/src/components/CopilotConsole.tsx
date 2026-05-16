@@ -33,14 +33,13 @@ export function CopilotConsole() {
 
   return (
     <section className="grid gap-5 lg:grid-cols-[1fr_0.9fr]">
-      <div className="surface rounded-md p-5">
+      <div className="surface rounded-md p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Workflow intake</p>
-            <h1 className="mt-2 text-2xl font-semibold tracking-tight">Operations Copilot</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
-              Most business bots answer questions. FlowPilot AI goes further: it understands the customer issue,
-              retrieves business context, decides the next workflow action, and updates operations analytics.
+            <p className="page-kicker">Workflow intake</p>
+            <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink">Convert a customer issue into a routed case</h1>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-600">
+              FlowPilot reads the issue, checks business context, recommends a route, creates a ticket, and leaves a decision trail the team can review.
             </p>
           </div>
         </div>
@@ -50,7 +49,7 @@ export function CopilotConsole() {
         </label>
         <textarea
           id="customer-message"
-          className="mt-2 min-h-40 w-full resize-y rounded-md border border-line bg-panel p-4 text-sm leading-6 outline-none transition focus:border-accent focus:bg-white"
+          className="focus-ring mt-2 min-h-40 w-full resize-y rounded-md border border-line bg-panel p-4 text-sm leading-6 transition focus:border-accent focus:bg-white"
           value={message}
           onChange={(event) => setMessage(event.target.value)}
         />
@@ -59,7 +58,7 @@ export function CopilotConsole() {
             type="button"
             onClick={runQuery}
             disabled={loading || !message.trim()}
-            className="inline-flex items-center gap-2 rounded-md bg-ink px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
+            className="focus-ring inline-flex items-center gap-2 rounded-md bg-ink px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
           >
             {loading ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Send className="h-4 w-4" aria-hidden="true" />}
             Run workflow
@@ -69,7 +68,7 @@ export function CopilotConsole() {
               key={prompt.label}
               type="button"
               onClick={() => setMessage(prompt.value)}
-              className="rounded-md border border-line bg-white px-3 py-2 text-xs font-medium text-gray-600 transition hover:border-accent hover:text-accent"
+              className="focus-ring rounded-md border border-line bg-white px-3 py-2 text-xs font-medium text-gray-600 transition hover:border-accent hover:text-accent"
             >
               {prompt.label}
             </button>
@@ -78,18 +77,19 @@ export function CopilotConsole() {
         {error ? <p className="mt-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
       </div>
 
-      <div className="surface rounded-md p-5">
-        <h2 className="text-lg font-semibold">Decision Output</h2>
+      <div className="surface rounded-md p-6">
+        <h2 className="text-lg font-semibold">Decision output</h2>
+        <p className="mt-1 text-sm text-gray-600">The same response object powers tickets, replay, and dashboard analytics.</p>
         {result ? (
           <div className="mt-4 space-y-4">
             <WorkflowSteps />
             <div className="grid grid-cols-2 gap-3">
-              <div className="rounded-md bg-panel p-3">
-                <p className="text-xs text-gray-500">Intent</p>
+              <div className="rounded-md border border-line bg-panel p-3">
+                <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Intent</p>
                 <p className="mt-1 font-semibold capitalize">{result.intent}</p>
               </div>
-              <div className="rounded-md bg-panel p-3">
-                <p className="text-xs text-gray-500">Confidence</p>
+              <div className="rounded-md border border-line bg-panel p-3">
+                <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Confidence</p>
                 <p className="mt-1 font-mono font-semibold">{Math.round(result.confidence * 100)}%</p>
               </div>
             </div>
@@ -99,7 +99,7 @@ export function CopilotConsole() {
                 <StatusBadge value={result.workflow.priority} />
               </div>
               <p className="mt-3 text-sm leading-6 text-gray-700">{result.response}</p>
-              <p className="mt-3 text-xs text-gray-500">Owner: {result.workflow.owner} | Ticket: {result.ticket_id}</p>
+              <p className="mt-3 text-xs text-gray-500">Owner: {result.workflow.owner} / Ticket: {result.ticket_id}</p>
             </div>
             <div>
               <p className="text-sm font-semibold text-gray-700">Cited source snippets</p>
@@ -116,7 +116,7 @@ export function CopilotConsole() {
           </div>
         ) : (
           <div className="mt-4 rounded-md border border-dashed border-line bg-panel p-5 text-sm leading-6 text-gray-600">
-            Submit a customer issue to see classification, retrieval, workflow routing, ticket creation, and source citations.
+            Submit a customer issue to see intent, retrieved policy context, route, ticket creation, and source citations.
           </div>
         )}
       </div>

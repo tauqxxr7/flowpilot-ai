@@ -12,7 +12,7 @@ const styles: Record<string, string> = {
 
 export function StatusBadge({ value }: { value: string }) {
   return (
-    <span className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${styles[value] ?? "border-gray-200 bg-gray-50 text-gray-700"}`}>
+    <span className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold capitalize leading-none ${styles[value] ?? "border-gray-200 bg-gray-50 text-gray-700"}`}>
       {value.replaceAll("_", " ")}
     </span>
   );

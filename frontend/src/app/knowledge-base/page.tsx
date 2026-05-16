@@ -7,18 +7,21 @@ export default async function KnowledgeBasePage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-3">
-        <Database className="h-6 w-6 text-accent" aria-hidden="true" />
+      <div className="flex items-start gap-3">
+        <div className="mt-1 rounded-md border border-line bg-white p-2">
+          <Database className="h-5 w-5 text-accent" aria-hidden="true" />
+        </div>
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Knowledge Base</h1>
-          <p className="text-sm text-gray-600">Seeded FlowZint-style policies and admin uploads used by retrieval.</p>
+          <p className="page-kicker">Business context</p>
+          <h1 className="mt-1 text-2xl font-semibold tracking-tight">Policies used for retrieval and citations</h1>
+          <p className="mt-1 text-sm text-gray-600">Seeded support rules and uploaded notes used to ground workflow decisions.</p>
         </div>
       </div>
       <KnowledgeUpload />
       <section className="surface rounded-md p-5">
         <div className="grid gap-4 md:grid-cols-2">
           {documents.map((doc) => (
-            <article key={doc.id} className="rounded-md border border-line bg-panel p-4 transition hover:border-accent/60">
+            <article key={doc.id} className="rounded-md border border-line bg-panel p-4 transition hover:border-gray-300 hover:bg-white">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <h2 className="font-semibold">{doc.title}</h2>

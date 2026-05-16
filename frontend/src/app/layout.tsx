@@ -8,7 +8,7 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
   title: "FlowPilot AI",
-  description: "AI-powered business workflow orchestration platform.",
+  description: "Customer issue routing, decision trails, and support operations analytics.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
