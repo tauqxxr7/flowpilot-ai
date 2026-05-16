@@ -4,13 +4,15 @@ Target length: 2 minutes.
 
 ## Recording Flow
 
+Open the live demo at `https://flowpilot-ai-one.vercel.app/workflow-lab` for the main workflow replay shot.
+
 1. Dashboard first.
    - Show operational context: tickets processed, escalations, confidence, category distribution, and recent activity.
 2. Knowledge Base.
    - Show that FlowPilot works from business documents and policy context.
-3. Workflow Lab.
+3. Workflow Lab: `https://flowpilot-ai-one.vercel.app/workflow-lab`.
    - Prompt: `We were charged twice and need a refund before renewal.`
-   - Click `Run workflow replay`.
+   - Click `Run replay`.
 4. Zoom into Live Workflow Replay.
    - Show each step: query received, intent detected, sources retrieved, decision generated, confidence scored, route selected, ticket created, dashboard updated.
 5. Source cards.
@@ -31,6 +33,6 @@ Target length: 2 minutes.
 ## Recording Tips
 
 - Keep browser zoom at 90% or 100%.
-- Use `/workflow-lab` as the main visual moment.
+- Use `https://flowpilot-ai-one.vercel.app/workflow-lab` as the main visual moment.
 - Avoid spending time in setup screens.
 - Do not claim production users or fake metrics.

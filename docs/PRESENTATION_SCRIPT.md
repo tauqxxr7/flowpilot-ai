@@ -14,9 +14,9 @@ For a growing SaaS business, that means a refund request, pricing question, onbo
 2. Open `/knowledge-base`.
    - "These are the business documents used for grounding. The system is designed around company context, not generic answers."
 
-3. Open `/workflow-lab`.
+3. Open `https://flowpilot-ai-one.vercel.app/workflow-lab`.
    - Enter: `We were charged twice and need a refund before renewal.`
-   - Click `Run workflow replay`.
+   - Click `Run replay`.
 
 4. Show the result.
    - "The intent is detected as refund."

@@ -12,6 +12,8 @@ Team: CodingGiants
 Track: Open Innovation  
 Hackathon: FlowZint AI Hackathon 2026  
 Repository: https://github.com/tauqxxr7/flowpilot-ai
+Live Demo: https://flowpilot-ai-one.vercel.app
+Backend Health: https://flowpilot-ai-zndh.onrender.com/health
 
 FlowPilot AI routes customer issues through an explainable support workflow, from intent detection and source lookup to ticket creation, escalation, and dashboard review.
 
@@ -160,7 +162,8 @@ Production smoke test: [docs/PRODUCTION_SMOKE_TEST.md](docs/PRODUCTION_SMOKE_TES
 Submission format:
 
 ```text
-Live Demo: <Vercel URL>
+Live Demo: https://flowpilot-ai-one.vercel.app
+Backend Health: https://flowpilot-ai-zndh.onrender.com/health
 GitHub: https://github.com/tauqxxr7/flowpilot-ai
 ```
 
@@ -170,7 +173,7 @@ Render backend setup:
 Root directory: backend
 Build command: pip install -r requirements.txt
 Start command: uvicorn main:app --host 0.0.0.0 --port $PORT
-Environment: FLOWPILOT_ALLOWED_ORIGINS=<Vercel frontend URL>
+Environment: FLOWPILOT_ALLOWED_ORIGINS=https://flowpilot-ai-one.vercel.app
 ```
 
 Vercel frontend setup:
@@ -178,7 +181,7 @@ Vercel frontend setup:
 ```text
 Root directory: frontend
 Build command: npm run build
-Environment: NEXT_PUBLIC_API_URL=<Render backend URL>
+Environment: NEXT_PUBLIC_API_URL=https://flowpilot-ai-zndh.onrender.com
 ```
 
 Full deployment notes are available in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
@@ -197,7 +200,7 @@ Target duration: 2 minutes.
 
 1. Open `/dashboard` and frame the project: FlowPilot AI is a support workflow router, not a chatbot.
 2. Open `/knowledge-base` and show seeded company context. Optionally upload a small `.txt` policy note.
-3. Open `/workflow-lab` and run: `We were charged twice and need a refund before renewal.`
+3. Open `https://flowpilot-ai-one.vercel.app/workflow-lab` and run: `We were charged twice and need a refund before renewal.`
 4. Zoom into Workflow Replay: customer query received, intent detected, sources retrieved, confidence scored, route selected, ticket created, dashboard updated.
 5. Run the escalation prompt: `Our dashboard automation failed three times and the customer is threatening to escalate.`
 6. Show that risk language routes the workflow to a human owner instead of auto-resolving.

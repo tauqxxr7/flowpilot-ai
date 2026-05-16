@@ -35,7 +35,7 @@ npm install
 Environment variable:
 
 ```text
-NEXT_PUBLIC_API_URL=<Render backend URL>
+NEXT_PUBLIC_API_URL=https://flowpilot-ai-zndh.onrender.com
 ```
 
 The frontend reads `NEXT_PUBLIC_API_URL`. If it is not set, it falls back to `http://localhost:8000` for local development only.
@@ -85,7 +85,7 @@ Environment variables:
 
 ```text
 PYTHON_VERSION=3.11.9
-FLOWPILOT_ALLOWED_ORIGINS=<Vercel frontend URL>
+FLOWPILOT_ALLOWED_ORIGINS=https://flowpilot-ai-one.vercel.app
 GEMINI_API_KEY=optional
 ```
 

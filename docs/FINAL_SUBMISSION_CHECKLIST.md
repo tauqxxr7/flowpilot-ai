@@ -2,8 +2,10 @@
 
 Repository: https://github.com/tauqxxr7/flowpilot-ai
 
-Live demo URL: _Add Vercel URL if deployed._
-Backend API URL: _Add Render or Railway URL if deployed._
+Live demo URL: https://flowpilot-ai-one.vercel.app
+Backend health: https://flowpilot-ai-zndh.onrender.com/health
+Backend API URL: https://flowpilot-ai-zndh.onrender.com
+GitHub: https://github.com/tauqxxr7/flowpilot-ai
 
 ## Run Instructions
 
@@ -41,7 +43,7 @@ npm run build
 4. Run the escalation prompt and show that risk language routes to a human owner.
 5. Open `/dashboard` and show category, confidence, escalation, and recent activity metrics.
 6. Open `/tickets` and show persisted ticket history.
-7. Open `/workflow-lab` and test a routing decision without creating a full ticket.
+7. Open `https://flowpilot-ai-one.vercel.app/workflow-lab` and test the live workflow replay.
 
 ## Architecture Summary
 
@@ -86,5 +88,5 @@ Stored in `assets/screenshots`:
 - [ ] `npm run build` passes
 - [ ] Backend `/health` returns OK
 - [ ] Backend `/api/query` returns `ticket_id`, `intent`, `confidence`, `workflow`, and `sources`
-- [ ] `NEXT_PUBLIC_API_URL` points to the deployed backend in Vercel
-- [ ] `FLOWPILOT_ALLOWED_ORIGINS` includes the deployed frontend URL
+- [ ] `NEXT_PUBLIC_API_URL` points to `https://flowpilot-ai-zndh.onrender.com` in Vercel
+- [ ] `FLOWPILOT_ALLOWED_ORIGINS` includes `https://flowpilot-ai-one.vercel.app` in Render
