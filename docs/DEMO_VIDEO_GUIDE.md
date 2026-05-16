@@ -6,7 +6,7 @@ Final video: recorded and stored at `assets/demo/flowpilot-ai-demo.mp4`.
 
 ## Opening Line
 
-"Most AI support bots only reply. FlowPilot AI routes a customer issue through an explainable support workflow."
+"Most AI support bots only reply. FlowPilot AI routes a customer issue through an explainable operational workflow."
 
 ## Recording Plan
 
@@ -20,7 +20,7 @@ Final video: recorded and stored at `assets/demo/flowpilot-ai-demo.mp4`.
 4. Zoom into the routing result.
    - Point out intent, confidence, ticket ID, route/action, owner, and source count.
 5. Show Workflow Replay / decision trail.
-   - Explain that each step is visible: query received, intent detected, source lookup, decision, confidence, route, ticket, dashboard update.
+   - Explain that the audit trail is visible: query received, intent detected, source lookup, decision, confidence, route, ticket, dashboard update.
 6. Open tickets: `https://flowpilot-ai-one.vercel.app/tickets`
    - Show the persisted ticket handoff.
 7. Close with the architecture line:
@@ -29,7 +29,7 @@ Final video: recorded and stored at `assets/demo/flowpilot-ai-demo.mp4`.
 ## What To Emphasize
 
 - This is not a chatbot screen.
-- Workflow Replay makes the route explainable and auditable.
+- Workflow Replay makes the route explainable and auditable for support review.
 - Confidence is visible before action is taken.
 - Source snippets show the response is grounded in business context.
 - Demo data is honest MVP seed data, not fake production usage.

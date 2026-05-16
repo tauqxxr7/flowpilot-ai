@@ -43,4 +43,4 @@ http://127.0.0.1:3000
 We were charged twice and need a refund before renewal.
 ```
 
-This shows intent detection, retrieval, confidence scoring, ticket routing, source citations, timeline replay, and dashboard impact.
+This shows intent detection, source lookup, confidence scoring, ticket routing, source citations, workflow replay, and dashboard impact.

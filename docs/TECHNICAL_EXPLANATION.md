@@ -47,7 +47,7 @@ This avoids blind automation and makes the workflow decision easier to explain.
 
 ## 6. Workflow Replay
 
-The Live Workflow Replay shows the decision path step by step. It helps with trust and auditability because a judge or operator can see:
+The Live Workflow Replay shows the operational decision path step by step. It acts as an explainable audit trail because a judge or operator can see:
 
 - what was received
 - how it was classified
@@ -56,4 +56,4 @@ The Live Workflow Replay shows the decision path step by step. It helps with tru
 - why a route was selected
 - how the ticket and dashboard were updated
 
-This is the key distinction from a chatbot. The replay makes the business workflow visible.
+This is the key distinction from a chatbot. The replay makes the business workflow visible as operational traceability, not just a generated answer.

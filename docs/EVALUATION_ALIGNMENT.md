@@ -2,7 +2,7 @@
 
 ## Model Innovation & Novelty
 
-FlowPilot AI is positioned as an AI operations workflow system rather than a generic chatbot. It combines intent detection, retrieval, decision routing, ticket creation, dashboard analytics, and a Live Workflow Replay that visualizes how the AI decision was made.
+FlowPilot AI is positioned as an operational AI copilot rather than a generic chatbot. It combines intent detection, source lookup, decision routing, ticket creation, dashboard analytics, and a Live Workflow Replay that exposes the support decision trail for auditability.
 
 ## Real-World Applicability
 
@@ -22,7 +22,7 @@ The MVP includes:
 
 ## Documentation Clarity
 
-The repository includes setup instructions, architecture notes, a demo script, evaluation alignment, and submission notes. Screenshots can be added after running the final local demo.
+The repository includes live links, setup instructions, architecture notes, demo scripts, evaluation alignment, production smoke checks, and final submission notes.
 
 ## FlowZint Relevance
 
