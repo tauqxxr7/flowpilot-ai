@@ -2,6 +2,8 @@
 
 Target length: 60-90 seconds.
 
+Final video: recorded and stored at `assets/demo/flowpilot-ai-demo.mp4`.
+
 ## Opening Line
 
 "Most AI support bots only reply. FlowPilot AI routes a customer issue through an explainable support workflow."

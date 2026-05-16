@@ -19,6 +19,12 @@ FlowPilot AI routes customer issues through an explainable support workflow, fro
 
 ![FlowPilot AI workflow replay](assets/screenshots/workflow-lab.png)
 
+## Demo Video
+
+[Watch the FlowPilot AI demo](assets/demo/flowpilot-ai-demo.mp4)
+
+This demo shows how FlowPilot AI converts a customer issue into an explainable support workflow: intent detection, source lookup, confidence scoring, ticket routing, cited policy snippets, and workflow replay.
+
 ## Live Demo Preview
 
 ![FlowPilot AI workflow replay demo](assets/demo/flowpilot-demo.gif)
