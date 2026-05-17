@@ -2,6 +2,15 @@
 
 FlowPilot AI is a policy-grounded operational AI copilot for explainable support routing and workflow decision trails.
 
+Live Demo: https://flowpilot-ai-one.vercel.app  
+Backend Health: https://flowpilot-ai-zndh.onrender.com/health
+
+## Demo Preview
+
+![FlowPilot AI workflow replay demo](assets/demo/flowpilot-demo.gif)
+
+[Watch full demo video](assets/demo/flowpilot-ai-demo.mp4)
+
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=nextdotjs)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Gemini](https://img.shields.io/badge/Gemini-ready-4285F4?style=for-the-badge&logo=google)](https://ai.google.dev/)
@@ -12,30 +21,15 @@ Team: CodingGiants
 Track: Open Innovation  
 Hackathon: FlowZint AI Hackathon 2026
 
-## Live Links
-
-- Live Demo: [https://flowpilot-ai-one.vercel.app](https://flowpilot-ai-one.vercel.app)
-- Workflow Lab: [https://flowpilot-ai-one.vercel.app/workflow-lab](https://flowpilot-ai-one.vercel.app/workflow-lab)
-- Backend Health: [https://flowpilot-ai-zndh.onrender.com/health](https://flowpilot-ai-zndh.onrender.com/health)
-- GitHub: [https://github.com/tauqxxr7/flowpilot-ai](https://github.com/tauqxxr7/flowpilot-ai)
-
 FlowPilot AI routes customer issues through an explainable support workflow, from intent detection and source lookup to ticket creation, escalation, and dashboard review.
 
-## Demo Video
-
-[Watch the FlowPilot AI demo](assets/demo/flowpilot-ai-demo.mp4)
+GitHub: [https://github.com/tauqxxr7/flowpilot-ai](https://github.com/tauqxxr7/flowpilot-ai)
 
 This demo shows how FlowPilot AI transforms a customer issue into an explainable operational workflow with intent detection, policy grounding, routing confidence, ticket creation, cited policy snippets, and workflow replay.
-
-## Live Demo Preview
-
-![FlowPilot AI workflow replay demo](assets/demo/flowpilot-demo.gif)
 
 ## Architecture Overview
 
 ![FlowPilot AI architecture diagram](assets/architecture/flowpilot-architecture-final.png)
-
-The backend owns the workflow pipeline. The frontend is an operations console that makes each routed support decision inspectable for a support lead, reviewer, or hackathon judge.
 
 ## Key Features
 
