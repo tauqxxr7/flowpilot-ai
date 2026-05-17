@@ -2,6 +2,8 @@
 
 FlowPilot AI is a policy-grounded operational AI copilot for explainable support routing and workflow decision trails.
 
+FlowPilot AI transforms enterprise support operations through policy-grounded AI routing, explainable workflow orchestration, and replayable decision intelligence.
+
 Live Demo: https://flowpilot-ai-one.vercel.app  
 Backend Health: https://flowpilot-ai-zndh.onrender.com/health  
 GitHub: https://github.com/tauqxxr7/flowpilot-ai
