@@ -6,7 +6,7 @@ Live Demo: https://flowpilot-ai-one.vercel.app
 Backend Health: https://flowpilot-ai-zndh.onrender.com/health  
 GitHub: https://github.com/tauqxxr7/flowpilot-ai
 
-Note: Render free instances may take 30-60 seconds to wake up. If the backend is waking up, wait briefly and refresh the live demo.
+Backend may take 30-60 seconds to wake up on Render free tier. If health shows 503, refresh once after wake-up.
 
 ## Demo Preview
 
