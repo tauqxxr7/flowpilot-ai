@@ -3,7 +3,7 @@
 import { UploadCloud } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { uploadDocument } from "@/lib/api";
+import { getApiErrorMessage, uploadDocument } from "@/lib/api";
 
 export function KnowledgeUpload() {
   const router = useRouter();
@@ -23,8 +23,8 @@ export function KnowledgeUpload() {
       const result = await uploadDocument(file);
       setStatus(`${result.filename} indexed into the knowledge base.`);
       router.refresh();
-    } catch {
-      setStatus("Upload failed. Check that the FastAPI backend is running on port 8000.");
+    } catch (caughtError) {
+      setStatus(getApiErrorMessage(caughtError));
     } finally {
       setBusy(false);
     }

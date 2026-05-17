@@ -96,7 +96,7 @@ function EmptyApiState({ title }: { title: string }) {
   return (
     <section className="rounded-md border border-line bg-white p-6 shadow-soft">
       <h1 className="text-xl font-semibold">{title}</h1>
-      <p className="mt-2 text-sm text-gray-600">Start the FastAPI backend on port 8000 to load live operations data.</p>
+      <p className="mt-2 text-sm text-gray-600">Backend is waking up. Please wait 30-60 seconds and try again.</p>
     </section>
   );
 }

@@ -3,13 +3,18 @@
 FlowPilot AI is a policy-grounded operational AI copilot for explainable support routing and workflow decision trails.
 
 Live Demo: https://flowpilot-ai-one.vercel.app  
-Backend Health: https://flowpilot-ai-zndh.onrender.com/health
+Backend Health: https://flowpilot-ai-zndh.onrender.com/health  
+GitHub: https://github.com/tauqxxr7/flowpilot-ai
+
+Note: Render free instances may take 30-60 seconds to wake up. If the backend is waking up, wait briefly and refresh the live demo.
 
 ## Demo Preview
 
 ![FlowPilot AI workflow replay demo](assets/demo/flowpilot-demo.gif)
 
 [Watch full demo video](assets/demo/flowpilot-ai-demo.mp4)
+
+This demo shows how FlowPilot AI transforms a customer issue into an explainable operational workflow with intent detection, policy grounding, routing confidence, ticket creation, cited policy snippets, and workflow replay.
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=nextdotjs)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
@@ -23,13 +28,32 @@ Hackathon: FlowZint AI Hackathon 2026
 
 FlowPilot AI routes customer issues through an explainable support workflow, from intent detection and source lookup to ticket creation, escalation, and dashboard review.
 
-GitHub: [https://github.com/tauqxxr7/flowpilot-ai](https://github.com/tauqxxr7/flowpilot-ai)
-
-This demo shows how FlowPilot AI transforms a customer issue into an explainable operational workflow with intent detection, policy grounding, routing confidence, ticket creation, cited policy snippets, and workflow replay.
-
 ## Architecture Overview
 
 ![FlowPilot AI architecture diagram](assets/architecture/flowpilot-architecture-final.png)
+
+## Why this is not just a chatbot
+
+Most support bots stop after generating a reply. FlowPilot AI turns the customer issue into an explainable workflow record.
+
+It:
+
+- classifies the customer intent
+- retrieves policy context from the knowledge base
+- calculates routing confidence
+- selects a workflow route
+- creates or escalates a ticket
+- shows a replayable decision trail for review
+
+## Demo Metrics
+
+The live demo surfaces three reviewable signals:
+
+| Metric | What it shows |
+| --- | --- |
+| Confidence score | How strongly the system trusts the selected route |
+| Escalation count | How many issues require human review |
+| Ticket volume | How many customer issues have been converted into workflow records |
 
 ## Key Features
 

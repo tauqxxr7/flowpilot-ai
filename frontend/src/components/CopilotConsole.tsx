@@ -2,7 +2,7 @@
 
 import { Loader2, Send } from "lucide-react";
 import { useState } from "react";
-import { QueryResponse, submitQuery } from "@/lib/api";
+import { getApiErrorMessage, QueryResponse, submitQuery } from "@/lib/api";
 import { StatusBadge } from "./StatusBadge";
 import { WorkflowSteps } from "./WorkflowSteps";
 
@@ -24,8 +24,8 @@ export function CopilotConsole() {
     try {
       const response = await submitQuery(message);
       setResult(response);
-    } catch {
-      setError("Backend API is not reachable. Start FastAPI on port 8000 and try again.");
+    } catch (caughtError) {
+      setError(getApiErrorMessage(caughtError));
     } finally {
       setLoading(false);
     }
@@ -74,7 +74,7 @@ export function CopilotConsole() {
             </button>
           ))}
         </div>
-        {error ? <p className="mt-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
+        {error ? <p className="mt-4 rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">{error}</p> : null}
       </div>
 
       <div className="surface rounded-md p-6">

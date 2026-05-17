@@ -35,7 +35,7 @@ export default async function KnowledgeBasePage() {
             </article>
           ))}
         </div>
-        {!documents.length ? <p className="text-sm text-gray-600">Backend is offline or no documents are indexed yet.</p> : null}
+        {!documents.length ? <p className="text-sm text-gray-600">Backend is waking up or no documents are indexed yet. Please wait 30-60 seconds and try again.</p> : null}
       </section>
     </div>
   );

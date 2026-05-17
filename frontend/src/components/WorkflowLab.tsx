@@ -3,7 +3,7 @@
 import { CheckCircle2, Clipboard, GitBranch, Play, RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { QueryResponse, submitQuery } from "@/lib/api";
+import { getApiErrorMessage, getHealth, QueryResponse, submitQuery } from "@/lib/api";
 import { StatusBadge } from "./StatusBadge";
 import { WorkflowSteps } from "./WorkflowSteps";
 
@@ -32,6 +32,7 @@ export function WorkflowLab() {
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+  const [backendStatus, setBackendStatus] = useState<"checking" | "online" | "waking" | "unavailable">("checking");
 
   function clearReplayTimers() {
     replayTimers.current.forEach((timer) => clearTimeout(timer));
@@ -58,15 +59,23 @@ export function WorkflowLab() {
     try {
       const response = await submitQuery(message, "Workflow Lab Demo");
       setResult(response);
+      setBackendStatus("online");
       replayTimeline(response.decision_timeline.length);
-    } catch {
-      setError("Backend API is not reachable. Start FastAPI on port 8000 and try again.");
+    } catch (caughtError) {
+      setBackendStatus("waking");
+      setError(getApiErrorMessage(caughtError));
     } finally {
       setLoading(false);
     }
   }
 
   useEffect(() => clearReplayTimers, []);
+
+  useEffect(() => {
+    getHealth()
+      .then(() => setBackendStatus("online"))
+      .catch(() => setBackendStatus("waking"));
+  }, []);
 
   useEffect(() => {
     if (demoStarted.current || searchParams.get("demo") !== "timeline") {
@@ -108,6 +117,7 @@ export function WorkflowLab() {
           <p className="page-kicker">Decision replay</p>
           <h1 className="mt-1 text-xl font-semibold tracking-tight">Explainable workflow replay</h1>
           <p className="mt-1 text-sm text-gray-600">Intent, evidence, route, ticket handoff, and review trail in one view.</p>
+          <BackendStatusChip status={backendStatus} />
         </div>
       </div>
       <section className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr]">
@@ -147,7 +157,7 @@ export function WorkflowLab() {
               Replay timeline
             </button>
           </div>
-          {error ? <p className="mt-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
+          {error ? <p className="mt-4 rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">{error}</p> : null}
         </div>
         <div className="surface rounded-md p-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
@@ -256,5 +266,26 @@ function SummaryMetric({ label, value }: { label: string; value: string }) {
       <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">{label}</p>
       <p className="mt-1 truncate text-sm font-medium capitalize text-gray-900">{value}</p>
     </div>
+  );
+}
+
+function BackendStatusChip({ status }: { status: "checking" | "online" | "waking" | "unavailable" }) {
+  const styles = {
+    checking: "border-gray-200 bg-gray-50 text-gray-600",
+    online: "border-emerald-200 bg-emerald-50 text-emerald-700",
+    waking: "border-amber-200 bg-amber-50 text-amber-700",
+    unavailable: "border-red-200 bg-red-50 text-red-700",
+  };
+  const labels = {
+    checking: "Backend: checking",
+    online: "Backend: online",
+    waking: "Backend: waking up / retry needed",
+    unavailable: "Backend: unavailable",
+  };
+
+  return (
+    <span className={`mt-3 inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${styles[status]}`}>
+      {labels[status]}
+    </span>
   );
 }

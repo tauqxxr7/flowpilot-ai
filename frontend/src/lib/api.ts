@@ -1,6 +1,21 @@
 export const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
+export const BACKEND_WAKE_MESSAGE =
+  "Backend is waking up. Please wait 30-60 seconds and try again.";
+
+export class FlowPilotApiError extends Error {
+  status?: number;
+  isWakeup: boolean;
+
+  constructor(message: string, status?: number, isWakeup = false) {
+    super(message);
+    this.name = "FlowPilotApiError";
+    this.status = status;
+    this.isWakeup = isWakeup;
+  }
+}
+
 export type SourceSnippet = {
   id: string;
   title: string;
@@ -72,21 +87,46 @@ export type DashboardStats = {
   recent_activity: Array<Record<string, string>>;
 };
 
+function isWakeupStatus(status: number) {
+  return status === 502 || status === 503 || status === 504;
+}
+
+export function getApiErrorMessage(error: unknown) {
+  if (error instanceof FlowPilotApiError) {
+    return error.message;
+  }
+  return BACKEND_WAKE_MESSAGE;
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${path}`, {
-    ...init,
-    headers: {
-      "Content-Type": "application/json",
-      ...init?.headers,
-    },
-    cache: "no-store",
-  });
+  let response: Response;
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, {
+      ...init,
+      headers: {
+        "Content-Type": "application/json",
+        ...init?.headers,
+      },
+      cache: "no-store",
+    });
+  } catch {
+    throw new FlowPilotApiError(BACKEND_WAKE_MESSAGE, undefined, true);
+  }
 
   if (!response.ok) {
-    throw new Error(`FlowPilot API error: ${response.status}`);
+    const isWakeup = isWakeupStatus(response.status);
+    throw new FlowPilotApiError(
+      isWakeup ? BACKEND_WAKE_MESSAGE : `FlowPilot API returned ${response.status}. Please try again.`,
+      response.status,
+      isWakeup,
+    );
   }
 
   return response.json() as Promise<T>;
+}
+
+export function getHealth(): Promise<{ status: string; service: string }> {
+  return request<{ status: string; service: string }>("/health");
 }
 
 export function submitQuery(message: string, customerName = "Acme Operations"): Promise<QueryResponse> {
@@ -112,13 +152,23 @@ export async function uploadDocument(file: File): Promise<{ id: string; status: 
   const body = new FormData();
   body.append("file", file);
 
-  const response = await fetch(`${API_BASE_URL}/api/documents/upload`, {
-    method: "POST",
-    body,
-  });
+  let response: Response;
+  try {
+    response = await fetch(`${API_BASE_URL}/api/documents/upload`, {
+      method: "POST",
+      body,
+    });
+  } catch {
+    throw new FlowPilotApiError(BACKEND_WAKE_MESSAGE, undefined, true);
+  }
 
   if (!response.ok) {
-    throw new Error(`FlowPilot upload error: ${response.status}`);
+    const isWakeup = isWakeupStatus(response.status);
+    throw new FlowPilotApiError(
+      isWakeup ? BACKEND_WAKE_MESSAGE : `FlowPilot upload returned ${response.status}. Please try again.`,
+      response.status,
+      isWakeup,
+    );
   }
 
   return response.json() as Promise<{ id: string; status: string; filename: string }>;

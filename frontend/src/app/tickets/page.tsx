@@ -46,7 +46,7 @@ export default async function TicketsPage() {
             </tbody>
           </table>
         </div>
-        {!tickets.length ? <p className="p-5 text-sm text-gray-600">No tickets yet. Run the Copilot workflow to create the first one.</p> : null}
+        {!tickets.length ? <p className="p-5 text-sm text-gray-600">No tickets yet, or the backend is waking up. Please wait 30-60 seconds and try again.</p> : null}
       </section>
     </div>
   );
